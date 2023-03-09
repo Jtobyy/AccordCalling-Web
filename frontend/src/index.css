@@ -1,0 +1,16 @@
+@font-face {
+  font-family: "Helvetica";
+  src: local("Helvetica"),
+   url("./fonts/Helvetica-Font/Helvetica-Bold.ttf") format("truetype");
+  }
+
+body {
+  margin: 0;
+  font-family: "Helvetica";
+  scroll-behavior: smooth;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

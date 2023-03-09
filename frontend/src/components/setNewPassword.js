@@ -33,19 +33,10 @@ export default function SetNewPassword() {
     return (
         <Paper component="div"
                sx={{ display: 'flex', flexDirection: 'column',
-               py: 10, px: 4, mt: 3, width: {xs: '70vw', sm: '40vw'},
+               pt: 8, pb: 15,  px: 4, mt: 3, width: {xs: '70vw', sm: '400px'},
                borderRadius: 4 }}>
-            <Stack direction='row' spacing={1}>
-                <Box bgcolor="#BFBFBF" width='52px' height='2px'></Box>
-                <Box bgcolor="#BFBFBF" width='52px' height='2px'></Box>
-                <Box bgcolor="#BFBFBF" width='52px' height='2px'></Box>
-                <Box bgcolor="#EEEEEE" width='52px' height='2px'></Box>
-            </Stack>
-
-            <Typography variant="h5" fontWeight={700} mt={3.5}>Create a Secure Password</Typography>
-            <Typography variant="body2" mt={1} color="#2E368F">
-                Secure Password Rules
-            </Typography>
+            
+            <Typography variant="h5" fontWeight={700}>Create New Password</Typography>
 
             <List>
                 <ListItem disableGutters disablePadding >
@@ -131,31 +122,12 @@ export default function SetNewPassword() {
                         } label="confirm password"/>
                 </FormControl>                
                     
-                <Typography variant="body2" mt={3} >
-                    By clicking create account you agree to our 
-                    <Link color="#2E368F"> Terms and Conditions</Link> and <Link color="#2E368F">Privacy Statement</Link>
-                </Typography>
-                    
-                    <RouterLink to='/Auth' state={{page: 'profileName' }} style={{ textDecoration: 'none', width: '10px !important' }}>
-                        <Button  color='success' variant="contained"
-                        sx={{  mt: 7.5, py: 1.5, backgroundColor: '#8DC641', textTransform: 'none', width: '100%' }}>
-                            Create Account
-                        </Button>
-                    </RouterLink>
-                
-                    <Typography variant="body2" mt={4}>
-                        Already have an account?
-                        <RouterLink to='/Signin'> <Link color="#2E368F" variant="span">Sign in</Link></RouterLink>
-                    </Typography>
-                    {/* <Link color="#2E368F" mt={3} textAlign="right" >Sign in</Link>
-                    <Button  color='success' href="#plans" variant="contained"
-                    
-                    sx={{  my: 3, py: 1.5, backgroundColor: '#8DC641', textTransform: 'none' }}>
-                        Log in
+                <RouterLink to='/Auth' state={{page: 'passwordChanged' }} style={{ textDecoration: 'none', width: '10px !important' }}>
+                    <Button  color='success' variant="contained"
+                    sx={{  mt: 7.5, py: 1.5, backgroundColor: '#8DC641', textTransform: 'none', width: '100%' }}>
+                        Create Account
                     </Button>
-            
-                     */}
-                    
+                </RouterLink>                    
                 </Stack>
         </Paper>
     )

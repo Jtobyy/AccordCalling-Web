@@ -14,7 +14,7 @@ export default function ForgotPassword() {
     return (
         <Paper component="div"
                sx={{ display: 'flex', flexDirection: 'column',
-               pt: 5, pb: 15, px: 4, mt: 3, width: {xs: '70vw', sm: '40vw'},
+               pt: 5, pb: 15, px: 4, mt: 3, width: {xs: '70vw', sm: '400px'},
                borderRadius:4 }}>
         
             <Typography variant="h5" fontWeight={700} mt={3.5}>Reset Password</Typography>

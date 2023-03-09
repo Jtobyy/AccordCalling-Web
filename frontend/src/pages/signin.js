@@ -40,11 +40,11 @@ export default function Signin() {
                             >
                 Your Calls Just Got Exciting
                 </Typography>
-                <Box component="img" flexGrow={1} sx={{ width: {xs: 'calc(50vh - 100px)', sm: 300, md: 400}, 
+                <Box component="img"
+                 flexGrow={1} sx={{ width: {xs: 'calc(50vh - 100px)', md: '100%'}, 
                                     ml: {xs: 5, sm: -1}, 
                                     position: {xs: 'relative'}, 
                                     top: {xs: '3px'},
-                                    
                                     }}
                                     src = {signinImage1} /> 
                                    

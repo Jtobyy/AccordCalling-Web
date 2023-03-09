@@ -5,8 +5,9 @@
   }
 
 body {
-  margin: 0;
+  margin: 0px !important;
   font-family: "Helvetica";
+  
   scroll-behavior: smooth;
 }
 

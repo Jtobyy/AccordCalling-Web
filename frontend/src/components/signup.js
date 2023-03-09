@@ -30,7 +30,7 @@ export default function Signup() {
     return (
         <Paper component="div"
                sx={{ display: 'flex', flexDirection: 'column',
-               py: 10, px: 4, mt: 3, width: {xs: '70vw', sm: '40vw'},
+               py: 10, px: 4, mt: 3, width: {xs: '70vw', sm: '400px'},
                borderRadius:4 }}>
             <Stack direction='row' spacing={1}>
                 <Box bgcolor="#BFBFBF" width='52px' height='2px'></Box>

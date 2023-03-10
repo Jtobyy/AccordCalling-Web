@@ -18,10 +18,17 @@ import Box from '@mui/material/Box';
 import { Link as RouterLink } from 'react-router-dom';
 import { ButtonGroup, Card, CardMedia } from '@mui/material';
 
+// import useMediaQuery from '@mui/material/useMediaQuery';
+
 import Plans from '../components/plans';
 import Footer from '../components/footer';
 import ScrollToTopOnMount from "../components/scrolltoview";
 
+// export function SimpleMediaQuery() {
+//   const matches = useMediaQuery('(max-height:650px)');
+
+//   return <span>{`(min-width:600px) matches: ${matches}`}</span>;
+// }
 
 export default function Landing() {
   return (
@@ -82,31 +89,34 @@ export default function Landing() {
                 sm={6} 
                 sx={{ display: 'flex', flexDirection: 'column', 
                       color: 'white', 
-                      order: {xs: 2, sm: 1},
+                      order: { xs: 0 },
+                      alignItems: {xs: 'center', sm: 'start'}
                        }}
-                alignItems='center'
+                
                 justifyContent='center'>
             <Typography variant='h2' 
-                        lineHeight={1.1} 
+                        lineHeight={1} 
                         fontWeight={700}
                         sx={{ fontSize: {xs: '2.5rem', sm: '3rem', md: '6rem' }, 
                               textAlign: { xs: 'center', md: 'left'},
+                              mt: {xs: '20px'}
                               }}
                         >
-              Your Calls Just Got Exciting
+              Stay connected from any part of the world
             </Typography>
-            <Typography variant='body1' sx={{ textAlign: {xs: 'center', md: 'left',}}} marginTop={2}>
-              Welcome to Accordcalling, where you can stay connected with your loved ones anytime and anywhere in the world.
+            <Typography variant='body1' pl={1} sx={{ textAlign: {xs: 'center', md: 'left',}}} marginTop={2}>
+              Welcome to Accordcalling, save your coins with our affordable offers.
             </Typography>
             <Button href="#plans" variant='contained' color='success'
               sx={{ textTransform: 'none', backgroundColor: '#B5EE68', width: 'calc(100% - 20px)', marginTop: 3,
-                    marginLeft: {xs: '10px', md: '-20px'}, py: {md: 2}, marginBottom: '80px', color: 'black' }}>
+                    marginLeft: {xs: '10px'}, py: {md: 2}, marginBottom: '80px', color: 'black' }}>
               Buy Now
             </Button>
           </Grid>
 
-          <Grid item xs={12} sm={6} order={1}>
-            <Box component="img" sx={{ height: '100%', width: {xs: 'calc(50vh - 100px)', sm: 300, md: 'calc(90% - 50px)'},  ml: {xs: 3,sm: -1} }} src = {landingImage1} />
+          <Grid item xs={12} sm={6}>
+            <Box component="img" sx={{ height: {xs: '100%', md: 'calc(90% + 15px)', lg: 'calc(100% + 5px)'}, width: {xs: 'calc(50vh - 100px)', sm: 300, md: 'calc(90% - 50px)'},  
+                                  ml: {xs: 3, sm: -1}, mt: {xs: -1.5, sm: -1 } }} src = {landingImage1} />
           </Grid>
         </Grid>
       </Box>
@@ -139,7 +149,7 @@ export default function Landing() {
               How to download Accordcalling on IOS devices
             </Typography>
             
-            <Link color="#8DC641" variant='body1'  marginTop={4}>
+            <Link color="#8DC641" variant='body1' pl={1}  marginTop={4}>
               Watch video
             </Link>
           </Grid>

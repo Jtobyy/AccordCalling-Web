@@ -7,6 +7,10 @@ import Overview from "../components/dashboard/overview";
 import AddFunds, { AddFundsSuccessful } from "../components/dashboard/addFunds";
 import ConfirmAddFunds from "../components/dashboard/confirmAddFunds";
 import MyAccount from "../components/dashboard/myAccount";
+import EditProfile from "../components/dashboard/editProfile";
+import ChangePassword from "../components/dashboard/changePassword";
+import ContactSupport from "../components/dashboard/contactSupport";
+import CallRecords from "../components/dashboard/callRecords";
 
 
 export default function Dashboard() {
@@ -14,7 +18,7 @@ export default function Dashboard() {
     const props = location.state;
 
     return (
-        <Box component='div' py={15} bgcolor="#D8D8D8" sx={{ px: {xs: 3, sm: 5}, minHeight:'100vh'}}>
+        <Box component='div' py={15} bgcolor="#F8F8F8" sx={{ px: {xs: 3, sm: 5,  lg: 15}, minHeight:'100vh'}}>
             <Header />
             {(() => {
                 if (props.page == 'overview')
@@ -27,6 +31,14 @@ export default function Dashboard() {
                     return <AddFundsSuccessful />
                 if (props.page == 'myaccount')
                     return <MyAccount />
+                if (props.page == 'editprofile')
+                    return <EditProfile />
+                if (props.page == 'changepassword')
+                    return <ChangePassword />
+                if (props.page == 'contactsupport')
+                    return <ContactSupport />
+                if (props.page == 'callrecords')
+                    return <CallRecords />
             })()}
         </Box>
     )

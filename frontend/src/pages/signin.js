@@ -23,11 +23,12 @@ export default function Signin() {
     return (
         <Grid container>
             <Grid item xs={12} 
-                       pt={5} sm={6}
+                       sm={6}
                        bgcolor="#8DC641"
                        sx={{ px: {xs: 1, sm: 2}, 
                              height: {xs: 'default', sm: '100vh'},
                              display: {sm: 'flex'},
+                             pt: {xs: 5, sm: 15},
                              flexDirection: {sm: 'column'}
                             }}
                         >
@@ -41,8 +42,8 @@ export default function Signin() {
                 Your Calls Just Got Exciting
                 </Typography>
                 <Box component="img"
-                 flexGrow={1} sx={{ width: {xs: 'calc(50vh - 100px)', md: '100%'}, 
-                                    ml: {xs: 5, sm: -1}, 
+                 flexGrow={1} sx={{ height: {sm: '100%'}, width: {xs: 'calc(50vh - 100px)', md: 'calc(90% - 50px)'}, 
+                                    ml: {xs: 5, sm: -1, md: 10}, 
                                     position: {xs: 'relative'}, 
                                     top: {xs: '3px'},
                                     }}

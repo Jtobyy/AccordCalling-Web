@@ -1,5 +1,5 @@
 import { Box, Paper, Typography, Stack, Button, Container } from "@mui/material";
-import { List, ListItem, ListItemText, IconButton } from "@mui/material";
+import { List, ListItem, ListItemText, ListItemIcon, IconButton } from "@mui/material";
 
 import { Link as RouterLink } from "react-router-dom";
 
@@ -55,39 +55,61 @@ export default function MyAccount() {
                     <ListItem
                     key={0}
                     secondaryAction={
-                        <IconButton aria-label="comment">
-                            <ArrowForwardIosIcon />
+                        <IconButton aria-label="call records">
+                            <RouterLink to='/Dashboard' state={{ page: 'callrecords'}}>
+                                <ArrowForwardIosIcon />
+                            </RouterLink>
                         </IconButton>
                     }
                     sx={{ my: 2, bgcolor: 'background.paper', borderRadius: 3}}
                     >
-                        <ListItemText primary="Call records" />
+                        <ListItemIcon>
+                            <Box component='img'
+                                 src={callRecordsIcon} />
+                        </ListItemIcon>    
+                        <ListItemText sx={{ ml: -1 }} primary="Call records" />
                     </ListItem>
                     <ListItem
                     key={1}
                     sx={{ my: 2, bgcolor: 'background.paper', borderRadius: 3}}
                     secondaryAction={
-                        <IconButton aria-label="comment">
-                            <ArrowForwardIosIcon />
+
+                        <IconButton aria-label="edit profile">
+                            <RouterLink to='/Dashboard' state={{ page: 'editprofile'}}>
+                                <ArrowForwardIosIcon />
+                            </RouterLink>    
                         </IconButton>
                     }
                     >
-                        <ListItemText primary="Edit Profile" />
+                        <ListItemIcon>
+                            <Box component='img'
+                                    src={editProfileIcon} />
+                        </ListItemIcon>  
+                        <ListItemText sx={{ ml: -1 }} primary="Edit Profile" />
                     </ListItem>
                     <ListItem
                     key={2}
                     sx={{ my: 2, bgcolor: 'background.paper', borderRadius: 3}}
                     secondaryAction={
-                        <IconButton aria-label="comment">
-                            <ArrowForwardIosIcon />
+                        <IconButton aria-label="change password">
+                            <RouterLink to='/Dashboard' state={{ page: 'changepassword'}}>
+                                <ArrowForwardIosIcon />
+                            </RouterLink>    
                         </IconButton>
                     }
                     >
-                        <ListItemText primary="Change Password" />
+                        <ListItemIcon>
+                            <Box component='img'
+                                 src={changePasswordIcon} />
+                        </ListItemIcon>        
+                        <ListItemText sx={{ ml: -1 }} primary="Change Password" />
                     </ListItem>
                 </List>    
+
+                <Box bgcolor="#F7F7F7" width='100%' height='10px'></Box>
+
                 <RouterLink to='/Dashboard' state={{page: 'addFundsSuccessful' }} 
-                style={{ textDecoration: 'none', color: '#FF1515' }}>
+                style={{ textDecoration: 'none', color: '#FF1515', marginTop: '20px' }}>
                         Log out
                 </RouterLink>
             </Stack>

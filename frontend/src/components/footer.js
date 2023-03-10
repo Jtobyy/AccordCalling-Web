@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import { Stack } from '@mui/system';
 
 import logo from '../images/accordLogo2.svg';
+import android2 from "../images/android2.svg";
 
   function Copyright(props) {
     return (
@@ -16,7 +17,7 @@ import logo from '../images/accordLogo2.svg';
 
 export default function Footer() {
   return (
-    <Box >
+    <div id="footer">
         <Grid container>
           <Grid item flexGrow={1}>
             <Box component='img' src={logo}/>
@@ -38,22 +39,11 @@ export default function Footer() {
             <Typography variant='subtitle1' sx={{ mt: {'xs': 3, 'sm': 1}}} py={1.5}>
               Get the App  
             </Typography>
-            <Box component='div' 
-                  bgcolor='black' 
-                  color='white' 
-                  p={1} mb={1}
-                  borderRadius={1}>
-              for Android
-            </Box>
-            <Box component='div' 
-                 bgcolor='black' 
-                 color='white' 
-                 p={1}
-                 borderRadius={1}>
-              for Iphone
-            </Box>
+            <Box component='img' 
+                  src={android2}>
+              </Box>
           </Grid>
         </Grid>
-    </Box>
+    </div>
   )
 }

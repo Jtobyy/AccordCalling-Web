@@ -12,13 +12,15 @@ import TellStatus from "../components/tellStatus";
 import ResetPassword from "../components/resetPassword";
 import ForgotPassword from "../components/forgotPassword";
 import SetNewPassword from "../components/setNewPassword";
+import ScrollToTopOnMount from "../components/scrolltoview";
 
 export default function Auth() {
     const location = useLocation();
     const props = location.state;
 
     return(
-        <Box disableGutters sx={{ bgcolor: '#6B9E27', pt: 7, pb: 10, minHeight: '100vh', height: '100%'}}>
+        <Box disableGutters sx={{ bgcolor: '#6B9E27', pt: 7, pb: 8, minHeight: '100vh'}}>
+            <ScrollToTopOnMount />        
             <Stack direction='column' alignItems='center'>
                 <Box component="img" 
                         sx={{ width: '80px'}}

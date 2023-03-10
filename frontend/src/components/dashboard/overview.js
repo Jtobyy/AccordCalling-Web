@@ -12,8 +12,8 @@ export default function Overview() {
     return (
         <Box component='div'>
             <Typography variant="h5" sx={{ py: {xs: 3, sm: 5}}} py={3} fontWeight={700}>Hello, ChiChi</Typography>
-            <Container sx={{ bgcolor: 'white', borderRadius: 3, py: 1, px: 1.5 }}>
-                <Container  sx={{ display: 'flex', bgcolor: '#E7F7E1', borderRadius: 3, py: 1 }}>
+            <Box sx={{ bgcolor: 'white', borderRadius: 3, py: 1, px: 1.5 }}>
+                <Box px={3}  sx={{ display: 'flex', bgcolor: '#E7F7E1', borderRadius: 3, py: 2 }}>
                     <Box>
                         <Typography variant="body2" >Acct. Balance</Typography>
                         <Typography variant="h5" fontWeight={700}>$ 23.00</Typography>
@@ -24,12 +24,12 @@ export default function Overview() {
                                           marginTop: '-40px',
                                           marginLeft: 'auto'  }}>
                         <Button  color='success' variant="contained"
-                        sx={{  mt: 5, py: 1.5, backgroundColor: '#8DC641', textTransform: 'none' }}>
+                        sx={{  mt: 5, py: 1.5, px: {md: 7}, backgroundColor: '#8DC641', textTransform: 'none' }}>
                             Add Funds
                         </Button>
                     </RouterLink>
-                </Container>
-            </Container>
+                </Box>
+            </Box>
             <Typography variant="h6" py={3} fontWeight={700}>Available Calling Plans</Typography>            
             <Plans />
             
@@ -50,7 +50,9 @@ export default function Overview() {
                     sx={{ my: 2, bgcolor: 'background.paper', borderRadius: 3, py: 2 }}
                     secondaryAction={
                         <IconButton aria-label="comment">
-                            <ArrowForwardIosIcon />
+                            <RouterLink to='/Dashboard' state={{page: 'myaccount' }}  style={{ textDecoration: 'none' }}>
+                                <ArrowForwardIosIcon />
+                            </RouterLink>
                         </IconButton>
                     }
                     >
@@ -61,7 +63,9 @@ export default function Overview() {
                     sx={{ my: 2, bgcolor: 'background.paper', borderRadius: 3, py: 2 }}
                     secondaryAction={
                         <IconButton aria-label="comment">
-                            <ArrowForwardIosIcon />
+                            <RouterLink to='/Dashboard' state={{page: 'contactsupport' }}  style={{ textDecoration: 'none' }}>
+                                <ArrowForwardIosIcon />
+                            </RouterLink>    
                         </IconButton>
                     }
                     >

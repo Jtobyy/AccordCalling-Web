@@ -27,7 +27,7 @@ export default function TellStatus(props) {
                 <Typography variant="h5" mt={1} fontWeight={700} textAlign='center'>0700 756 5898</Typography>
 
             
-                <RouterLink to='/Auth' state={{page: 'otp' }} style={{ textDecoration: 'none', width: '10px !important' }}>
+                <RouterLink to='/Dashboard' state={{page: 'overview' }} style={{ textDecoration: 'none', width: '10px !important' }}>
                     <Button  color='success' variant="contained"
                     sx={{  mt: 5, py: 1.5, backgroundColor: '#8DC641', textTransform: 'none', width: '100%' }}>
                         Okay, Thank You!
@@ -49,7 +49,7 @@ export default function TellStatus(props) {
                     Your password has been changed successfully
                 </Typography>
             
-                <RouterLink to='/Auth' state={{page: 'otp' }} style={{ textDecoration: 'none', width: '10px !important' }}>
+                <RouterLink to='/Dashboard' state={{page: 'overview' }} style={{ textDecoration: 'none', width: '10px !important' }}>
                     <Button  color='success' variant="contained"
                     sx={{  mt: 5, py: 1.5, backgroundColor: '#8DC641', textTransform: 'none', width: '100%' }}>
                         Okay, Thank You!

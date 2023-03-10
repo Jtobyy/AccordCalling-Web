@@ -10,7 +10,6 @@ import tz from '../images/TZ.png';
 import ng from '../images/NG.png';
 import gh from '../images/GH.png';
 
-
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
@@ -80,7 +79,7 @@ return (
             md={4}
             
           >
-            <Card sx={{ textAlign: 'center', boxShadow: 5, pb: 5, pt: 8 }} >
+            <Card sx={{ textAlign: 'center', boxShadow: 5, pb: 5, pt: 8, borderRadius: 3 }} >
               <Box sx={{display: 'flex', justifyContent: 'center'}}>
                 <CardMedia
                   component='img'

@@ -13,7 +13,7 @@ import { Route, Routes, BrowserRouter as Router, } from 'react-router-dom';
 import './fonts/Helvetica-Font/Helvetica.ttf';
 import CreatePassword from './components/createPassword';
 import ProfileName from './components/setProfileName';
-import TellStatus from './components/tellStatus';
+import Dashboard from './pages/dashboard';
 
 class App extends React.Component {
   render() {
@@ -27,6 +27,7 @@ class App extends React.Component {
             <Route path='/CreatePassword' element={<CreatePassword />}></Route>
             <Route path='/ProfileName' element={<ProfileName />}></Route>
             <Route path='/Auth' element={<Auth />}></Route>
+            <Route path='/Dashboard' element={<Dashboard />}></Route>
           </Routes>
         </div>
       </Router>

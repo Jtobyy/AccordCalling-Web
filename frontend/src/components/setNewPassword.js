@@ -22,7 +22,6 @@ import { useState } from "react";
 
 export default function SetNewPassword() {
     const [showPassword, setShowPassword] = React.useState(false);
-    const [number, setNumber] = useState('');
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 

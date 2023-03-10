@@ -11,6 +11,7 @@ import EditProfile from "../components/dashboard/editProfile";
 import ChangePassword from "../components/dashboard/changePassword";
 import ContactSupport from "../components/dashboard/contactSupport";
 import CallRecords from "../components/dashboard/callRecords";
+import ConfirmBuyPlan, { BuyPlanFailed, BuyPlanSuccessful } from "../components/dashboard/plansConfirmation";
 
 
 export default function Dashboard() {
@@ -23,22 +24,30 @@ export default function Dashboard() {
             {(() => {
                 if (props.page == 'overview')
                     return <Overview />
-                if (props.page == 'addfunds')
+                else if (props.page == 'addfunds')
                     return <AddFunds />
-                if (props.page == 'confirmAddFunds')
+                else if (props.page == 'confirmAddFunds')
                     return <ConfirmAddFunds />
-                if (props.page == 'addFundsSuccessful')
+                else if (props.page == 'addFundsSuccessful')
                     return <AddFundsSuccessful />
-                if (props.page == 'myaccount')
+                else if (props.page == 'myaccount')
                     return <MyAccount />
-                if (props.page == 'editprofile')
+                else if (props.page == 'editprofile')
                     return <EditProfile />
-                if (props.page == 'changepassword')
+                else if (props.page == 'changepassword')
                     return <ChangePassword />
-                if (props.page == 'contactsupport')
+                else if (props.page == 'contactsupport')
                     return <ContactSupport />
-                if (props.page == 'callrecords')
+                else if (props.page == 'callrecords')
                     return <CallRecords />
+
+
+                else if (props.page == 'confirmBuyPlan')
+                    return <ConfirmBuyPlan plan={props.plan} price={props.price} country={props.country} />
+                else if (props.page == 'buyPlanSuccessful')
+                    return <BuyPlanSuccessful />
+                else if (props.page == 'buyPlanFailed')
+                    return <BuyPlanFailed />
             })()}
         </Box>
     )

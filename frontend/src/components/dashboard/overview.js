@@ -35,17 +35,6 @@ export default function Overview() {
             
             <List sx={{ width: '100%', mt: 5, bgcolor: 'transparent' }}>
                     <ListItem
-                    key={0}
-                    secondaryAction={
-                        <IconButton aria-label="comment">
-                            <ArrowForwardIosIcon />
-                        </IconButton>
-                    }
-                    sx={{ my: 2, bgcolor: 'background.paper', borderRadius: 3, py: 2 }}
-                    >
-                        <ListItemText primary="Buy Number" />
-                    </ListItem>
-                    <ListItem
                     key={1}
                     sx={{ my: 2, bgcolor: 'background.paper', borderRadius: 3, py: 2 }}
                     secondaryAction={

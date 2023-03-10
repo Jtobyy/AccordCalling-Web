@@ -16,7 +16,7 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 
 import { Link as RouterLink } from 'react-router-dom';
-import { ButtonGroup } from '@mui/material';
+import { ButtonGroup, Card, CardMedia } from '@mui/material';
 
 import Plans from '../components/plans';
 import Footer from '../components/footer';
@@ -118,7 +118,45 @@ export default function Landing() {
         <Plans />
       </Box>
         
+      <Box disableGutters >
+        <Grid container spacing={2} 
+                      sx={{ pt: {xs: 20, sm: 18, height: '100vh'},
+                      px: { sm: 10} }}>
+          <Grid item xs={12} 
+                sm={6} 
+                sx={{ display: 'flex', flexDirection: 'column',  
+                      order: {xs: 2, sm: 1},
+                      alignItems: {xs: 'center', md: 'start'}
+                       }}
+                justifyContent='center'>
+            <Typography variant='h2' 
+                        lineHeight={1.1} 
+                        fontWeight={700}
+                        sx={{ fontSize: {xs: '1.5rem', sm: '3rem', md: '4rem' }, 
+                              textAlign: { xs: 'center', md: 'left'},
+                              }}
+                        >
+              How to download Accordcalling on IOS devices
+            </Typography>
+            
+            <Link color="#8DC641" variant='body1'  marginTop={4}>
+              Watch video
+            </Link>
+          </Grid>
 
+          <Grid item xs={12} sm={6} order={1}>
+            {/* <iframe src='https://www.youtube.com/shorts/mHTc7FV6jsI'/> */}
+            <Card>
+              <CardMedia component='iframe'
+                          height="450"
+                          src='https://youtube.com/embed/mHTc7FV6jsI?feature=share' />
+            </Card>
+            
+            
+          </Grid>
+        </Grid>
+      </Box>
+      
       <Box 
           component="footer"
           sx={{

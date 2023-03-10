@@ -10,6 +10,8 @@ import tz from '../images/TZ.png';
 import ng from '../images/NG.png';
 import gh from '../images/GH.png';
 
+import { Link as RouterLink } from 'react-router-dom';
+
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
@@ -59,6 +61,7 @@ const plans = [
 export default function Plans() {
   const [checked, setChecked] = React.useState(false);
   const [chosenPlan, setChosenPlan] = React.useState('');
+  const [chosenPlanPrice, setChosenPlanPrice] = React.useState('');
 
   const containerRef = React.useRef(null);
 
@@ -101,6 +104,7 @@ return (
                   <IconButton onClick={() => {
                                     handleChange()
                                     setChosenPlan(plan.plansCode[0])
+                                    setChosenPlanPrice(plan.price[0])
                   }} disabled={!checked}>
                     <ArrowBackIosIcon sx={{color: '#929292'}} />  
                   </IconButton>  
@@ -135,6 +139,7 @@ return (
                   <IconButton onClick={() => {
                                       handleChange();
                                       setChosenPlan(plan.plansCode[1]);
+                                      setChosenPlanPrice(plan.price[1]);
                                       }} disabled={checked}>
                     <ArrowForwardIosIcon sx={{color: '#929292'}} />
                   </IconButton>
@@ -142,12 +147,15 @@ return (
               </CardContent>
 
               <CardActions sx={{ 'display': 'flex', justifyContent: 'center'}}>
-                <Button color='success' 
-                        variant="contained" 
-                        sx={{  mx: 1.5, backgroundColor: '#8DC641', textTransform: 'none',
-                                width: '50%' }}>
-                  Buy Now
-                </Button>
+                <RouterLink to="/Dashboard" 
+                state={{ page: 'confirmBuyPlan', plan: chosenPlan, price: chosenPlanPrice, country: plan.country }} style={{ textDecoration: 'none', width: '100%' }}>
+                  <Button color='success' 
+                          variant="contained" 
+                          sx={{  mx: 1.5, backgroundColor: '#8DC641', textTransform: 'none',
+                                width: '50%'  }}>
+                    Buy Now
+                  </Button>
+                </RouterLink>
               </CardActions>
               <Typography color='#929292'>
                 All plans valid for 30days

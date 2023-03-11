@@ -5,14 +5,65 @@ import Button from "@mui/material/Button";
 
 import React from "react";
 
-
 import { Link as RouterLink } from 'react-router-dom';
 import { useLocation } from "react-router-dom";
+
+import { BASE_URL_VOIPSWITCH, ENDPOINTS } from "..";
 
 
 export default function ProfileName() {
     const location = useLocation();
     const props = location.state;
+
+    // const handleSumbit = () => {
+    //     axios.post(`${BASE_URL_VOIPSWITCH}${ENDPOINTS['signup']}`, {
+    //          login: String,
+    //          password: String,
+    //          webPassword: String,
+    //          address: String = "",
+    //          zipCode: String = "",
+    //          city: String = "",
+    //          taxID: String = "",
+    //          eMail: String,
+    //          phoneNumber: String,
+    //          mobileNumber: String,
+    //          tariffId: Int,
+    //          accountState: Int = 0,
+    //          generateInvoice: Boolean = false,
+    //          sendInvoice: Boolean = false,
+    //          country: String = "",
+    //          state: String = "",
+    //          firstName: String,
+    //          lastName: String,
+    //          callsLimit: Int = 0,
+    //          postPaid: Boolean = false,
+    //          postPaidCredit: Int = 0,
+    //          postPaidDescription: String = "",
+    //          resellerId: Int = 86
+    //     })
+    //     .then((res) => {
+    //         const idClient = res['data']['idClient'];
+            
+    //         if (idClient === 0) {
+    //             setValidLogin(false)
+    //         }
+    //         else {
+    //             setValidLogin(true)
+    
+    //             sessionStorage.setItem('token', randomToken.create('oijfsdof82048f0wfj0wj0w8f24jf')(20))
+    
+    //             sessionStorage.setItem('firstName', res['data']['firstName'])
+    //             sessionStorage.setItem('lastName', res['data']['lastName'])
+    //             sessionStorage.setItem('login', login)
+    //             sessionStorage.setItem('idClient', res['data']['idClient'])
+    //             sessionStorage.setItem('creditBalance', res['data']['creditBalance'])
+    //             sessionStorage.setItem('email', res['data']['email'])
+    //         }
+        
+    //         console.log("Success")
+    //     })
+    //     .catch((err) => {console.log(err.message)})    
+    // }    
 
     return (
         <Paper component="div"

@@ -7,9 +7,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useLocation } from "react-router-dom";
 
 
-export default function Otp() {
-    const location = useLocation();
-    const props = location.state;
+export default function Otp(props) {
 
     return (
         <Paper component="div"
@@ -41,7 +39,8 @@ export default function Otp() {
                 </Stack>
                 <Typography variant="body2" mx='auto' mt={3}>Code expires in :30</Typography>
 
-                <RouterLink to='/Auth' state={{page: 'createPassword' }} style={{ textDecoration: 'none' }}>
+                <RouterLink to='/Auth' 
+                state={{ page: 'createPassword', number: props.number, country: props.country }} style={{ textDecoration: 'none' }}>
                     <Button  color='success' variant="contained"
                     sx={{  mt: 7.5, py: 1.5, backgroundColor: '#8DC641', textTransform: 'none', width: '100%' }}>
                         Verify

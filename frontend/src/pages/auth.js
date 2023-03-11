@@ -30,7 +30,7 @@ export default function Auth() {
                         if (props.page === "signup")
                             return <Signup  />
                         else if (props.page === "otp")
-                            return <Otp number={props.number}/>
+                            return <Otp number={props.number} country={props.country} />
                         else if (props.page === "createPassword")
                             return <CreatePassword />
                         else if (props.page === "profileName")

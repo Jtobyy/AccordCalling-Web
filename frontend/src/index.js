@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -30,6 +31,7 @@ export const ENDPOINTS = {
   'editProfile': 'admin.client.personal.update',
   'changePassword': 'admin.client.password.set',
   'getPassword': 'admin.client.password.get',
+  'signup': 'admin.retail.create',
 }
 
 class App extends React.Component {

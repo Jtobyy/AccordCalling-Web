@@ -1,7 +1,7 @@
 import { Box, Paper, Typography, Stack, Button, Container } from "@mui/material";
-import { List, ListItem, ListItemText, ListItemIcon, IconButton } from "@mui/material";
+import { List, ListItem, ListItemText, ListItemIcon, IconButton, Link } from "@mui/material";
 
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, Navigate } from "react-router-dom";
 
 import KeyboardBackspace from '@mui/icons-material/KeyboardBackspace';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -11,14 +11,32 @@ import callRecordsIcon from '../../images/callRecordsIcon.svg';
 import editProfileIcon from '../../images/editProfileIcon.svg';
 import changePasswordIcon from '../../images/changePasswordIcon.svg';
 
+import { useState } from "react";
+import ScrollToTopOnMount from "../scrolltoview";
+
 
 export default function MyAccount() {
+    const username = sessionStorage.getItem('login')
+    const acctBalance = sessionStorage.getItem('creditBalance')
+    const phoneNumber = "..."
+
+    const [loggedOut, setLoggedOut] = useState(false)
+    
+    const logout = () => {    
+        sessionStorage.clear()
+        setLoggedOut(true)
+    }
+
+    if (loggedOut) 
+        return <Navigate to="/Signin" />
+
+    else
     return (
-            <Paper component="div"
+        <Paper component="div"
             sx={{ display: 'flex', flexDirection: 'column',
             pt: 3, pb: 10, mt: 3, mx: 'auto', width: {xs: '90vw', sm: '600px'},
             borderRadius:4 }}>
-
+        <ScrollToTopOnMount />
         <Box display='flex' px={3} pb={2} alignItems='center'>
             <RouterLink to='/Dashboard' state={{page: 'overview' }} style={{ textDecoration: 'none', marginTop: '-24px' }}>
                 <KeyboardBackspace sx={{ position: 'absolute' }}/>
@@ -32,13 +50,13 @@ export default function MyAccount() {
                 <Box fontSize="80px" >
                     <AccountCircle fontSize="inherit" />
                 </Box>
-                <Typography variant="h6" mt={-2} >0803 567 0547</Typography>
-                <Typography variant="body2" color='#929292'>08007565898</Typography>
+                <Typography variant="h6" mt={-2} >{username}</Typography>
+                <Typography variant="body2" color='#929292'>{phoneNumber}</Typography>
 
                 <Container  sx={{ display: 'flex', bgcolor: '#E7F7E1', borderRadius: 3, py: 1, mt: 3 }}>
                     <Box>
                         <Typography variant="body2" >Acct. Balance</Typography>
-                        <Typography variant="h5" fontWeight={700}>$ 23.00</Typography>
+                        <Typography variant="h5" fontWeight={700}>$ {acctBalance}</Typography>
                     </Box>
                     <RouterLink to='/Dashboard' state={{page: 'addfunds' }} 
                                 style={{ textDecoration: 'none', 
@@ -108,10 +126,11 @@ export default function MyAccount() {
 
                 <Box bgcolor="#F7F7F7" width='100%' height='10px'></Box>
 
-                <RouterLink to='/Dashboard' state={{page: 'addFundsSuccessful' }} 
-                style={{ textDecoration: 'none', color: '#FF1515', marginTop: '20px' }}>
+                <Link
+                onClick={logout}
+                style={{ cursor: 'pointer', textDecoration: 'none', color: '#FF1515', marginTop: '20px' }}>
                         Log out
-                </RouterLink>
+                </Link>
             </Stack>
         </Box>
     </Paper>

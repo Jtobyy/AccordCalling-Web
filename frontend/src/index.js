@@ -14,6 +14,23 @@ import './fonts/Helvetica-Font/Helvetica.ttf';
 import CreatePassword from './components/createPassword';
 import ProfileName from './components/setProfileName';
 import Dashboard from './pages/dashboard';
+import NotFound from './pages/notFound';
+
+import { loadProgressBar } from 'axios-progress-bar';
+import 'axios-progress-bar/dist/nprogress.css';
+
+
+loadProgressBar();
+
+export const BASE_URL_VOIPSWITCH = "https://apps.nativetalk.com.ng:449/VS.WebAPI.Admin/"
+export const BASE_URL_VOIPSWITCH2 = "https://apps.nativetalk.com.ng:449/vsservices/api/json/syncreply/"
+
+export const ENDPOINTS = { 
+  'login': 'admin.client.login',
+  'editProfile': 'admin.client.personal.update',
+  'changePassword': 'admin.client.password.set',
+  'getPassword': 'admin.client.password.get',
+}
 
 class App extends React.Component {
   render() {
@@ -28,6 +45,8 @@ class App extends React.Component {
             <Route path='/ProfileName' element={<ProfileName />}></Route>
             <Route path='/Auth' element={<Auth />}></Route>
             <Route path='/Dashboard' element={<Dashboard />}></Route>
+
+            <Route path="*" element={<NotFound />} />            
           </Routes>
         </div>
       </Router>

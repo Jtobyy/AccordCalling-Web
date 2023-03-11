@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 
 import Header from "../components/header"
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
 import Overview from "../components/dashboard/overview";
 import AddFunds, { AddFundsSuccessful } from "../components/dashboard/addFunds";
@@ -18,6 +18,9 @@ export default function Dashboard() {
     const location = useLocation();
     const props = location.state;
 
+    if (!sessionStorage.getItem('token') || sessionStorage.getItem('token') === "undefined")
+        return <Navigate to="/Signin" />
+    else
     return (
         <Box component='div' py={15} bgcolor="#F8F8F8" sx={{ px: {xs: 3, sm: 5,  lg: 15}, minHeight:'100vh'}}>
             <Header />

@@ -9,14 +9,18 @@ import Plans from "../plans";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 export default function Overview() {
+    const firstName = sessionStorage.getItem('firstName')
+    const acctBalance = sessionStorage.getItem('creditBalance')
+
     return (
-        <Box component='div'>
-            <Typography variant="h5" sx={{ py: {xs: 3, sm: 5}}} py={3} fontWeight={700}>Hello, ChiChi</Typography>
+        <Box component='div'
+             sx={{ mt: {xs: 0, sm: -3}}}>
+            <Typography variant="h5" sx={{ py: {xs: 3, sm: 1}}} fontWeight={700}>Hello, {firstName}</Typography>
             <Box sx={{ bgcolor: 'white', borderRadius: 3, py: 1, px: 1.5 }}>
-                <Box px={3}  sx={{ display: 'flex', bgcolor: '#E7F7E1', borderRadius: 3, py: 2 }}>
+                <Box px={3}  sx={{ display: 'flex', alignItems: 'center', bgcolor: '#E7F7E1', borderRadius: 3, py: 1 }}>
                     <Box>
                         <Typography variant="body2" >Acct. Balance</Typography>
-                        <Typography variant="h5" fontWeight={700}>$ 23.00</Typography>
+                        <Typography variant="h5" fontWeight={700}>$ {acctBalance}</Typography>
                     </Box>
                     <RouterLink to='/Dashboard' state={{page: 'addfunds' }} 
                                 style={{ textDecoration: 'none', 
@@ -24,16 +28,16 @@ export default function Overview() {
                                           marginTop: '-40px',
                                           marginLeft: 'auto'  }}>
                         <Button  color='success' variant="contained"
-                        sx={{  mt: 5, py: 1.5, px: {md: 7}, backgroundColor: '#8DC641', textTransform: 'none' }}>
+                        sx={{  mt: 5, py: 1, px: {md: 7}, backgroundColor: '#8DC641', textTransform: 'none' }}>
                             Add Funds
                         </Button>
                     </RouterLink>
                 </Box>
             </Box>
-            <Typography variant="h6" py={3} fontWeight={700}>Available Calling Plans</Typography>            
+            <Typography variant="h6" sx={{ pb: {xs: 3, sm: 1}, pt: {xs: 3, sm: 2}}}  fontWeight={700}>Available Calling Plans</Typography>            
             <Plans />
             
-            <List sx={{ width: '100%', mt: 5, bgcolor: 'transparent' }}>
+            <List sx={{ width: '100%', mt: 0, bgcolor: 'transparent' }}>
                     <ListItem
                     key={1}
                     sx={{ my: 2, bgcolor: 'background.paper', borderRadius: 3, py: 2 }}

@@ -38,7 +38,9 @@ export default function Header() {
                         sx={{mx: {sm: 5}}}
                         src={android}>
                     </Box>
-                    <img src={back} alt='' />
+                    <RouterLink to="/">
+                        <img src={back} alt='' />
+                    </RouterLink>
                 </nav>
                 
             </Toolbar>

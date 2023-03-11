@@ -19,11 +19,11 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 const plans = [
     {
       country: 'NIGERIA',
-      price: ['5', '10'],
+      price: ['10', '5'],
       src: ng,
       description: [
-        'FOR 30MINS', 
-        'FOR 60MINS',
+        'FOR 250MINS',
+        'FOR 60MINS', 
       ],
       plansCode: [
         'nigeria0',
@@ -32,10 +32,10 @@ const plans = [
     },
     {
       country: 'GHANA',
-      price: ['5', '10'],
+      price: ['10', '5'],
       src: gh,
       description: [
-        'FOR 30MINS', 
+        'FOR 250MINS',
         'FOR 60MINS',
       ],
       plansCode: [
@@ -45,11 +45,11 @@ const plans = [
     },
     {
       country: 'TANZANIA',
-      price: ['5', '10'],
+      price: ['10', '5'],
       src: tz,
       description: [
+        'FOR 150MINS',
         'FOR 30MINS', 
-        'FOR 60MINS',
       ],
       plansCode: [
         'tanzania0',
@@ -82,17 +82,17 @@ return (
             md={4}
             
           >
-            <Card sx={{ textAlign: 'center', boxShadow: 5, pb: 5, pt: 8, borderRadius: 3 }} >
+            <Card sx={{ textAlign: 'center', boxShadow: 5, pb: 2, pt: 2, borderRadius: 3 }} >
               <Box sx={{display: 'flex', justifyContent: 'center'}}>
                 <CardMedia
                   component='img'
                   alt='nigeria'
                   src={plan.src}
-                  sx={{  width: '200px' }}
+                  sx={{  width: '100px' }}
                   />
               </Box>
-              <Typography variant='h5' fontWeight={700} pt={2}>{plan.country}</Typography>
-              <CardContent sx={{ pt: 4 }}>
+              <Typography variant='h5' fontWeight={700} pt={1}>{plan.country}</Typography>
+              <CardContent sx={{ pt: 1 }}>
                 <Box
                   sx={{
                     display: 'flex',
@@ -148,10 +148,11 @@ return (
 
               <CardActions sx={{ 'display': 'flex', justifyContent: 'center'}}>
                 <RouterLink to="/Dashboard" 
-                state={{ page: 'confirmBuyPlan', plan: chosenPlan, price: chosenPlanPrice, country: plan.country }} style={{ textDecoration: 'none', width: '100%' }}>
+                state={{ page: 'confirmBuyPlan', plan: chosenPlan, price: chosenPlanPrice, country: plan.country }} 
+                style={{ textDecoration: 'none', width: '100%' }}>
                   <Button color='success' 
                           variant="contained" 
-                          sx={{  mx: 1.5, backgroundColor: '#8DC641', textTransform: 'none',
+                          sx={{ mt: -1,  mx: 1.5, backgroundColor: '#8DC641', textTransform: 'none',
                                 width: '50%'  }}>
                     Buy Now
                   </Button>

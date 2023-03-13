@@ -32,6 +32,7 @@ export const ENDPOINTS = {
   'changePassword': 'admin.client.password.set',
   'getPassword': 'admin.client.password.get',
   'signup': 'admin.retail.create',
+  'getBalance': 'admin.client.balance',
 }
 
 class App extends React.Component {

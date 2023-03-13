@@ -16,39 +16,74 @@ import React from "react";
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 
 
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, Navigate } from 'react-router-dom';
 import { useState } from "react";
+import ScrollToTopOnMount from "./scrolltoview";
 
-const countries = [
-    {
-        value: '+234',
-        label: 'Nigeria',
-    },
-    {
-        value: '+233',
-        label: 'Ghana',
-    },
-    {
-        value: '+255',
-        label: 'Tanzania',
-    },
-]
 
 export default function CreatePassword() {
     const [showPassword, setShowPassword] = React.useState(false);
-    const [number, setNumber] = useState('');
+    const [password, setPassword] = React.useState('');
+    const [passwordConfirmation, setPasswordConfirmation] = React.useState('');
+    const [allowToProfile, setAllowToProfile] = React.useState(false);
 
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const [check1, setCheck1] = React.useState(true);
+    const [check2, setCheck2] = React.useState(false);
+    const [check3, setCheck3] = React.useState(false);    
+
+    const [validPassword, setValidPassword] = React.useState(true);
+    const [validPasswordConfirmation, setValidPasswordConfirmation] = React.useState(true);
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);    
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        if (password.length < 8) {
+            setCheck2(false);
+            setValidPassword(false);
+        } else {
+            setCheck2(true);
+        }
+        
+        let specialChar = false
+        for (let c of password) {
+            // console.log(c)
+            if ("!\"#@$%^&*(){}|\\:?;<>,.~`/1234567890".includes(c)) {
+                specialChar = true
+                setCheck3(true)
+                setValidPassword(true);
+                break
+            }
+        }
+        if (!specialChar) {
+            setCheck3(false)
+            setValidPassword(false)
+        }
+
+        if (check1 && check2 && check3) {
+            setValidPassword(true);
+            if (password !== passwordConfirmation) setValidPasswordConfirmation(false);
+            else setValidPasswordConfirmation(true);
+        }
+
+        if (check1 && check2 && check3 && validPassword && validPasswordConfirmation)        
+            setAllowToProfile(true)
+    }
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
       };
 
+    if (allowToProfile)      
+      return <Navigate to="/Auth" state={{ page: "profileName", password: password }} />
+    else
     return (
         <Paper component="div"
                sx={{ display: 'flex', flexDirection: 'column',
                py: 10, px: 4, mt: 3, width: {xs: '70vw', sm: '400px'},
                borderRadius: 4 }}>
+            <ScrollToTopOnMount /> 
             <Stack direction='row' spacing={1}>
                 <Box bgcolor="#BFBFBF" width='52px' height='2px'></Box>
                 <Box bgcolor="#BFBFBF" width='52px' height='2px'></Box>
@@ -65,7 +100,8 @@ export default function CreatePassword() {
                 <ListItem disableGutters disablePadding >
                     <ListItemButton disableGutters >
                         <ListItemIcon>
-                            <CheckCircleRoundedIcon sx={{ color: '#8DC641'}} />
+                            <CheckCircleRoundedIcon htmlColor={(
+                                () => {if (check1) return '#8DC641'} )()}/>
                         </ListItemIcon>
                         <ListItemText sx={{ position: 'relative', ml: '-25px'}}>
                             <Typography variant="body2">
@@ -78,7 +114,8 @@ export default function CreatePassword() {
                 sx={{ position: 'relative', mt: '-10px'}}>
                     <ListItemButton disableGutters>
                         <ListItemIcon>
-                            <CheckCircleRoundedIcon sx={{ color: '#8DC641'}} />
+                            <CheckCircleRoundedIcon htmlColor={(
+                                () => {if (check2) return '#8DC641'} )()} />
                         </ListItemIcon>
                         <ListItemText sx={{ position: 'relative', ml: '-25px'}}>
                             <Typography variant="body2">
@@ -91,7 +128,8 @@ export default function CreatePassword() {
                 sx={{ position: 'relative', mt: '-10px'}}>
                     <ListItemButton disableGutters>
                         <ListItemIcon>
-                            <CheckCircleRoundedIcon />
+                            <CheckCircleRoundedIcon htmlColor={(
+                                () => {if (check3) return '#8DC641'} )()}/>
                         </ListItemIcon>
                         <ListItemText sx={{ position: 'relative', ml: '-25px'}}>
                             <Typography variant="body2">
@@ -104,10 +142,12 @@ export default function CreatePassword() {
 
             <Stack direction='column' pt={1.5}>
                 <FormControl variant="outlined" sx={{ mt: 3}}>
-                    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                    <InputLabel htmlFor="password">Password</InputLabel>
                     <OutlinedInput 
-                        id="outlined-adornment-password"
+                        id="password"
                         sx={{ color: 'black'}}
+                        error={!validPassword}
+                        onChange={(e) => setPassword(e.target.value)}
                         type={showPassword ? 'text' : 'password'}
                         endAdornment={
                         <InputAdornment position="end">
@@ -125,10 +165,12 @@ export default function CreatePassword() {
                 </FormControl>
 
                 <FormControl variant="outlined" sx={{ mt: 3}}>
-                    <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
+                    <InputLabel htmlFor="confirm-password">Confirm Password</InputLabel>
                     <OutlinedInput 
-                        id="outlined-adornment-password"
+                        id="confirm-password"
                         sx={{ color: 'black'}}
+                        onChange={(e) => setPasswordConfirmation(e.target.value)}
+                        error={!validPasswordConfirmation}
                         type={showPassword ? 'text' : 'password'}
                         endAdornment={
                         <InputAdornment position="end">
@@ -150,12 +192,10 @@ export default function CreatePassword() {
                     <Link color="#2E368F"> Terms and Conditions</Link> and <Link color="#2E368F">Privacy Statement</Link>
                 </Typography>
                     
-                    <RouterLink to='/Auth' state={{page: 'profileName' }} style={{ textDecoration: 'none', width: '10px !important' }}>
-                        <Button  color='success' variant="contained"
-                        sx={{  mt: 7.5, py: 1.5, backgroundColor: '#8DC641', textTransform: 'none', width: '100%' }}>
-                            Create Account
-                        </Button>
-                    </RouterLink>
+                <Button onClick={(e) => {handleSubmit(e)}} color='success' variant="contained"
+                sx={{  mt: 7.5, py: 1.5, backgroundColor: '#8DC641', textTransform: 'none', width: '100%' }}>
+                    Create Account
+                </Button>
                 
                     <Typography variant="body2" mt={4}>
                         Already have an account?

@@ -1,5 +1,5 @@
 import logo from '../images/accordLogo2.svg';
-import landingImage1 from '../images/landingImage1.png';
+import landingImage2 from '../images/landingImage2.png';
 
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
@@ -23,6 +23,8 @@ import { ButtonGroup, Card, CardMedia } from '@mui/material';
 import Plans from '../components/plans';
 import Footer from '../components/footer';
 import ScrollToTopOnMount from "../components/scrolltoview";
+import background from "../images/background.png";
+import greenBtn from "../images/greenBtn.png";
 
 // export function SimpleMediaQuery() {
 //   const matches = useMediaQuery('(max-height:650px)');
@@ -31,6 +33,8 @@ import ScrollToTopOnMount from "../components/scrolltoview";
 // }
 
 export default function Landing() {
+  const [noPlanSet, setNoPlanSet] = React.useState(0)
+
   return (
     <div>
         <ScrollToTopOnMount />
@@ -63,9 +67,12 @@ export default function Landing() {
               </nav>
 
             <ButtonGroup sx={{ marginLeft: 'auto' }}>
-              <Button  color='success' href="#plans" variant="contained" sx={{ textTransform: 'none',  my: 1, mx: 1.5, px: {md: 5}, backgroundColor: '#8DC641' }}>
-                Buy Now
-              </Button>
+              <RouterLink to="/Auth" state={{ page: 'signup' }} style={{ textDecoration: 'none' }}>
+                <Button  color='success' variant="contained" sx={{ textTransform: 'none',  my: 1, mx: 1.5, px: {md: 5}, backgroundColor: '#8DC641' }}>
+                  Sign up
+                </Button>
+              </RouterLink>
+              
 
               <RouterLink to="/Signin" style={{ textDecoration: 'none'}}>
                 <Button color='success' href="" variant="outlined" sx={{ textTransform: 'none', my: 1, mx: 1.5, borderColor: '#8DC641', color: '#8DC641' }}>
@@ -80,11 +87,12 @@ export default function Landing() {
         </AppBar>
 
 
-      <Box disableGutters sx={{ backgroundColor: "#8DC641"}}>
+      <Box disableGutters >
         <Grid container spacing={2} 
                       sx={{ pt: {xs: 20, sm: 18, height: '100vh'},
                       px: { sm: 10},
-                      backgroundColor: "#6B9E27"}}>
+                      backgroundImage: `url(${background})`,
+                      }}>
           <Grid item xs={12} 
                 sm={6} 
                 sx={{ display: 'flex', flexDirection: 'column', 
@@ -107,25 +115,40 @@ export default function Landing() {
             <Typography variant='body1' pl={1} sx={{ textAlign: {xs: 'center', md: 'left',}}} marginTop={2}>
               Welcome to Accordcalling, save your coins with our affordable offers.
             </Typography>
-            <Button href="#plans" variant='contained' color='success'
-              sx={{ textTransform: 'none', backgroundColor: '#B5EE68', width: 'calc(100% - 20px)', marginTop: 3,
-                    marginLeft: {xs: '10px'}, py: {md: 2}, marginBottom: '80px', color: 'black' }}>
-              Buy Now
-            </Button>
+            <RouterLink to="/Auth" state={{ page: 'signup' }} style={{ textDecoration: 'none', width: '100%' }}>
+              <Button  variant='contained' color='success'
+                sx={{ textTransform: 'none', backgroundColor: '#B5EE68', width: "calc(100% - 20px)", marginTop: 3,
+                      marginLeft: {xs: '10px'}, py: {md: 2}, marginBottom: '80px', color: 'black' }}>
+                Sign Up
+              </Button>
+            </RouterLink>
           </Grid>
 
           <Grid item xs={12} sm={6}>
-            <Box component="img" sx={{ height: {xs: '100%', md: 'calc(90% + 15px)', lg: 'calc(100% + 5px)'}, width: {xs: 'calc(50vh - 100px)', sm: 300, md: 'calc(90% - 50px)'},  
-                                  ml: {xs: 3, sm: -1}, mt: {xs: -1.5, sm: -1 } }} src = {landingImage1} />
+            <Box component="img" sx={{ height: {xs: '100%', md: 'calc(90% + 15px)', lg: 'calc(100% + 5px)'}, width: {xs: 'calc(50vh - 135px)', sm: 400, md: 'calc(90% - 85px)'},  
+                                  ml: {xs: 5, sm: -1}, mt: {xs: -1.5, sm: -1 } }} src = {landingImage2} />
           </Grid>
         </Grid>
       </Box>
 
-      <Box sx={{ pt: 10, px: { md: 10 }}} id="plans">
-        <Typography variant='h4' fontWeight="700" textAlign='center' py={5}>
+      <Box textAlign='center' sx={{ pt: 10, px: { md: 10 }}} id="plansBox">
+        <Typography variant='h4' fontWeight="700" textAlign='center' py={1}>
           Call Plans
         </Typography>
-        <Plans />
+        {(() => {
+          let plansList = [];
+          for (let i = 0; i <= noPlanSet; i++) {
+            plansList.push(<Plans key={i} set={i} />)
+          }
+          return <Box>{plansList}</Box>
+        })()}
+
+        <Button  variant='contained' color='success'
+            onClick={() => setNoPlanSet(noPlanSet + 1)}
+            sx={{ textTransform: 'none', backgroundColor: '#8DC641', marginTop: 8,
+                  marginLeft: {xs: '10px'}, width: '180px' }}>
+            See more
+        </Button>
       </Box>
         
       <Box disableGutters >
@@ -155,7 +178,6 @@ export default function Landing() {
           </Grid>
 
           <Grid item xs={12} sm={6} order={1}>
-            {/* <iframe src='https://www.youtube.com/shorts/mHTc7FV6jsI'/> */}
             <Card>
               <CardMedia component='iframe'
                           height="450"

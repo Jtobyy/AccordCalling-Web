@@ -23,8 +23,8 @@ export default function TellStatus(props) {
                     mx='auto'
                     src={successIcon} />
                 <Typography variant="h5" fontWeight={700} textAlign='center'>Your account has been created successfully</Typography>
-                <Typography variant="body2" mt={3} textAlign='center'>Your free Accord Number is</Typography>
-                <Typography variant="h5" mt={1} fontWeight={700} textAlign='center'>0700 756 5898</Typography>
+                {/* <Typography variant="body2" mt={3} textAlign='center'>Your free Accord Number is</Typography> */}
+                {/* <Typography variant="h5" mt={1} fontWeight={700} textAlign='center'>0700 756 5898</Typography> */}
 
             
                 <RouterLink to='/Dashboard' state={{page: 'overview' }} style={{ textDecoration: 'none', width: '10px !important' }}>

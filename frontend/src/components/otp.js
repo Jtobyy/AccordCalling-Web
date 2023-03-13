@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 
 
 export default function Otp(props) {
+    const number = sessionStorage.getItem('number')
 
     return (
         <Paper component="div"
@@ -23,7 +24,7 @@ export default function Otp(props) {
 
             <Typography variant="h5" fontWeight={700} mt={3.5}>Enter Verification Code</Typography>
             <Typography variant="body2" mt={3} color="#2E368F">
-                Verification code was sent to {props.number}
+                Verification code was sent to {number}
             </Typography>
 
             <Stack direction='column' pt={6}>
@@ -40,7 +41,7 @@ export default function Otp(props) {
                 <Typography variant="body2" mx='auto' mt={3}>Code expires in :30</Typography>
 
                 <RouterLink to='/Auth' 
-                state={{ page: 'createPassword', number: props.number, country: props.country }} style={{ textDecoration: 'none' }}>
+                state={{ page: 'createPassword' }} style={{ textDecoration: 'none' }}>
                     <Button  color='success' variant="contained"
                     sx={{  mt: 7.5, py: 1.5, backgroundColor: '#8DC641', textTransform: 'none', width: '100%' }}>
                         Verify

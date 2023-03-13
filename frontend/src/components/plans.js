@@ -16,156 +16,97 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 
-const plans = [
-    {
-      country: 'NIGERIA',
-      price: ['10', '5'],
-      src: ng,
-      description: [
-        'FOR 250MINS',
-        'FOR 60MINS', 
-      ],
-      plansCode: [
-        'nigeria0',
-        'nigeria1'
-      ]
-    },
-    {
-      country: 'GHANA',
-      price: ['10', '5'],
-      src: gh,
-      description: [
-        'FOR 250MINS',
-        'FOR 60MINS',
-      ],
-      plansCode: [
-        'ghana0',
-        'ghana1'
-      ]
-    },
-    {
-      country: 'TANZANIA',
-      price: ['10', '5'],
-      src: tz,
-      description: [
-        'FOR 150MINS',
-        'FOR 30MINS', 
-      ],
-      plansCode: [
-        'tanzania0',
-        'tanzania1'
-      ]
-    },
-  ];
+const countries = ['NIGERIA', 'GHANA', 'TANZANIA']
+const flags = [ng, gh, tz]
 
-export default function Plans() {
-  const [checked, setChecked] = React.useState(false);
-  const [chosenPlan, setChosenPlan] = React.useState('');
-  const [chosenPlanPrice, setChosenPlanPrice] = React.useState('');
+const plansArray = [
+  {
+    price: '10',
+    code: '0',
+    descriptions: ['FOR 250MINS', 'FOR 250MINS', 'FOR 150MINS'],
+  },  {
+      price: '5',
+      code: '0',
+      descriptions: ['FOR 250MINS', 'FOR 250MINS', 'FOR 150MINS'],
+  }
+]
 
-  const containerRef = React.useRef(null);
 
-  const handleChange = () => {
-    setChecked((prev) => !prev);
-  };
-  
+export default function Plans(props) {
+  if (props.set >= plansArray.length) return
+  const plans = plansArray[props.set]
+  // const [checked, setChecked] = React.useState(false);
 
-return (
-  <div>
-    <Grid container spacing={5} sx={{ px: { xs: 1, sm: 5}}} >
-    {plans.map((plan) => (
-          <Grid
-            item
-            key={plan.country}
-            xs={12}
-            sm={6}
-            md={4}
-            
-          >
-            <Card sx={{ textAlign: 'center', boxShadow: 5, pb: 2, pt: 2, borderRadius: 3 }} >
-              <Box sx={{display: 'flex', justifyContent: 'center'}}>
-                <CardMedia
-                  component='img'
-                  alt='nigeria'
-                  src={plan.src}
-                  sx={{  width: '100px' }}
-                  />
-              </Box>
-              <Typography variant='h5' fontWeight={700} pt={1}>{plan.country}</Typography>
-              <CardContent sx={{ pt: 1 }}>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'baseline',
-                    
-                  }}
-                >
-                  <IconButton onClick={() => {
-                                    handleChange()
-                                    setChosenPlan(plan.plansCode[0])
-                                    setChosenPlanPrice(plan.price[0])
-                  }} disabled={!checked}>
-                    <ArrowBackIosIcon sx={{color: '#929292'}} />  
-                  </IconButton>  
-                  
+  return (
+    <div>
+      <Grid container spacing={5} sx={{ mt: 0.5, px: { xs: 1, sm: 5}}} >
+      {countries.map((country, index) => {
+        let price = plans.price;
+        let description = plans.descriptions[index];
+        let flagSrc = flags[index];
+        let planCode = country + plans.code
 
-                  <Box>
-                      <Fade sx={{ position: 'absolute'}} in={!checked} container={containerRef.current}>
-                        <Box>
-                          <Typography component="h2" fontWeight={700} variant="h3" color="#929292">
-                            ${plan.price[0]}
-                          </Typography>
-                          <Typography variant="subtitle1" fontWeight={700} color="#929292">
-                            {plan.description[0]}
-                          </Typography>
-                        </Box>
-                      </Fade>
-
-                      <Fade in={checked} container={containerRef.current}>
-                        <Box>
-                          <Typography component="h2" fontWeight={700} variant="h3" color="#929292">
-                            ${plan.price[1]}
-                          </Typography>
-                          <Typography variant="subtitle1" fontWeight={700} color="#929292">
-                            {plan.description[1]}
-                          </Typography>
-                        </Box>
-                      </Fade>                      
-                  
+        return (
+            <Grid
+              item
+              key={index}
+              xs={12}
+              sm={6}
+              md={4}
+              
+            >
+              <Card sx={{ textAlign: 'center', boxShadow: 5, pb: 2, pt: 2, borderRadius: 3 }} >
+                <Box sx={{display: 'flex', justifyContent: 'center'}}>
+                  <CardMedia
+                    component='img'
+                    alt={country}
+                    src={flagSrc}
+                    sx={{  width: '100px' }}
+                    />
+                </Box>
+                <Typography variant='h5' fontWeight={700} pt={1}>{country}</Typography>
+                <CardContent sx={{ pt: 1 }}>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'baseline',
                       
-                  </Box>                  
+                    }}
+                  > 
+                    <Box>
+                        <Box>
+                          <Typography component="h2" fontWeight={700} variant="h3" color="#929292">
+                            ${price}
+                          </Typography>
+                          <Typography variant="subtitle1" fontWeight={700} color="#929292">
+                            {description}
+                          </Typography>
+                        </Box>
+                    </Box>                  
+                  </Box>
 
-                  <IconButton onClick={() => {
-                                      handleChange();
-                                      setChosenPlan(plan.plansCode[1]);
-                                      setChosenPlanPrice(plan.price[1]);
-                                      }} disabled={checked}>
-                    <ArrowForwardIosIcon sx={{color: '#929292'}} />
-                  </IconButton>
-                </Box>    
-              </CardContent>
+                </CardContent>
 
-              <CardActions sx={{ 'display': 'flex', justifyContent: 'center'}}>
-                <RouterLink to="/Dashboard" 
-                state={{ page: 'confirmBuyPlan', plan: chosenPlan, price: chosenPlanPrice, country: plan.country }} 
-                style={{ textDecoration: 'none', width: '100%' }}>
-                  <Button color='success' 
-                          variant="contained" 
-                          sx={{ mt: -1,  mx: 1.5, backgroundColor: '#8DC641', textTransform: 'none',
-                                width: '50%'  }}>
-                    Buy Now
-                  </Button>
-                </RouterLink>
-              </CardActions>
-              <Typography color='#929292'>
-                All plans valid for 30days
-              </Typography>
-            </Card>
-          </Grid>
-    ))}
-  </Grid>
-  </div>
-)
-                }
+                <CardActions sx={{ 'display': 'flex', justifyContent: 'center'}}>
+                  <RouterLink to="/Dashboard" 
+                  state={{ page: 'confirmBuyPlan', plan: planCode, price: price, country: country }} 
+                  style={{ textDecoration: 'none', width: '100%' }}>
+                    <Button color='success' 
+                            variant="contained" 
+                            sx={{ mt: -1,  mx: 1.5, backgroundColor: '#8DC641', textTransform: 'none',
+                                  width: '50%'  }}>
+                      Buy Now
+                    </Button>
+                  </RouterLink>
+                </CardActions>
+                <Typography color='#929292'>
+                  All plans valid for 30days
+                </Typography>
+              </Card>
+            </Grid>
+        )}
+      )}
+    </Grid>
+  </div>)}
   

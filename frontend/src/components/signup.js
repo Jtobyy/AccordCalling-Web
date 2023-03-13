@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 
 import { countries } from "../countries";
 import axios from 'axios';
+import ScrollToTopOnMount from "./scrolltoview";
 
 
 export default function Signup() {
@@ -19,19 +20,17 @@ export default function Signup() {
 
     const [verify, setVerify] = useState(false);
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
         sessionStorage.setItem('country', country)
         sessionStorage.setItem('countryLabel', countryLabel)
         sessionStorage.setItem('number', number)
 
-        setVerify(true)        
+        if (number != "") setVerify(true)        
     }
 
-    useEffect(() => {
-        setVerify(false)
-    });
-
-    if (verify && sessionStorage.getItem('number') != "") 
+    if (verify && sessionStorage.getItem('number') != "")
         return <Navigate to="/Auth" state={{page: 'otp' }} />
     else
     return (
@@ -39,6 +38,7 @@ export default function Signup() {
                sx={{ display: 'flex', flexDirection: 'column',
                py: 10, px: 4, mt: 3, width: {xs: '70vw', sm: '400px'},
                borderRadius:4 }}>
+            <ScrollToTopOnMount /> 
             <Stack direction='row' spacing={1}>
                 <Box bgcolor="#BFBFBF" width='52px' height='2px'></Box>
                 <Box bgcolor="#EEEEEE" width='52px' height='2px'></Box>
@@ -82,7 +82,7 @@ export default function Signup() {
                         We will be sending a 4 digit verification code to the number provided
                     </Typography>
                     
-                    <Button  color='success' variant="contained"
+                    <Button onClick={(e) => handleSubmit(e)} color='success' variant="contained"
                         sx={{  mt: 7.5, py: 1.5, backgroundColor: '#8DC641', textTransform: 'none', width: '100%' }}>
                             Proceed
                     </Button>

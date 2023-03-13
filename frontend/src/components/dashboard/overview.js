@@ -1,16 +1,37 @@
 import { Box, Button, IconButton, Typography, List, ListItem, ListItemText } from "@mui/material";
-import { Container } from "@mui/material";
-import { Stack } from "@mui/material";
 
 import { Link as RouterLink } from "react-router-dom";
 
 import Plans from "../plans";
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+import { BASE_URL_VOIPSWITCH, ENDPOINTS } from "../..";
 
 export default function Overview() {
     const firstName = sessionStorage.getItem('firstName')
-    const acctBalance = sessionStorage.getItem('creditBalance')
+    const [acctBalance, setAcctBalance] = useState(sessionStorage.getItem('creditBalance'))
+
+    console.log(sessionStorage.getItem('idClient'))
+
+    useEffect(() => {
+        axios.post(`${BASE_URL_VOIPSWITCH}${ENDPOINTS['getBalance']}`, {
+            clientType: 32,
+            clientId: sessionStorage.getItem('idClient'),
+            login: sessionStorage.getItem('login')
+        })
+        .then((res) => {
+            console.log(res)
+            sessionStorage.setItem('creditBalance', res['data']['creditBalance']);
+            setAcctBalance(res['data']['creditBalance']);
+        
+            console.log("Success")
+        })
+        .catch((err) => {console.log(err.message)})
+    });
+    
 
     return (
         <Box component='div'
@@ -35,7 +56,7 @@ export default function Overview() {
                 </Box>
             </Box>
             <Typography variant="h6" sx={{ pb: {xs: 3, sm: 1}, pt: {xs: 3, sm: 2}}}  fontWeight={700}>Available Calling Plans</Typography>            
-            <Plans />
+            <Plans set={0} />
             
             <List sx={{ width: '100%', mt: 0, bgcolor: 'transparent' }}>
                     <ListItem

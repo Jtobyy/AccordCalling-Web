@@ -1,6 +1,6 @@
 import { Box, Grid, Typography, FormControl, InputAdornment, IconButton, TextField, OutlinedInput, InputLabel, Button } from "@mui/material";
 import Link from "@mui/material/Link";
-import signinImage1 from '../images/siginImage1.png';
+import signinImage1 from '../images/landingImage2.png';
 import logo from '../images/accordLogo2.svg';
 import { Stack } from "@mui/system";
 
@@ -12,6 +12,8 @@ import { Link as RouterLink, Navigate } from 'react-router-dom';
 
 import axios from "axios";
 import randomToken from 'random-token';
+import background from "../images/background.png";
+
 
 import { BASE_URL_VOIPSWITCH, ENDPOINTS } from "..";
 
@@ -65,12 +67,12 @@ export default function Signin() {
             <Grid container>
                 <Grid item xs={12} 
                         sm={6}
-                        bgcolor="#8DC641"
                         sx={{ px: {xs: 1, sm: 2}, 
                                 height: {xs: 'default', sm: '100vh'},
                                 display: {sm: 'flex'},
                                 pt: {xs: 5, sm: 15},
-                                flexDirection: {sm: 'column'}
+                                flexDirection: {sm: 'column'},
+                                backgroundImage: `url(${background})`,
                                 }}
                             >
                     <Typography variant='h2' 
@@ -83,7 +85,7 @@ export default function Signin() {
                     Your Calls Just Got Exciting
                     </Typography>
                     <Box component="img"
-                    flexGrow={1} sx={{ height: {sm: '100%'}, width: {xs: 'calc(50vh - 100px)', md: 'calc(90% - 50px)'}, 
+                    flexGrow={1} sx={{ height: {sm: '80%'}, width: {xs: 'calc(50vh - 100px)', md: 'calc(80% - 50px)'}, 
                                         ml: {xs: 5, sm: -1, md: 10}, 
                                         position: {xs: 'relative'}, 
                                         top: {xs: '3px'},
@@ -92,12 +94,15 @@ export default function Signin() {
                                     
                 </Grid>
                 <Grid item xs={12} sm={6} sx={{ p: {xs: 5, sm: 6, md: 10} }}>
-                    <Box component='img'
-                        src={logo} />
+                    <RouterLink to="/">
+                        <Box component='img'
+                            src={logo} />
+                    </RouterLink>
+                    
                     <Typography variant='h3' pt={3} fontWeight={700} sx={{ fontSize: {xs: '2rem' }}}>Welcome Back!</Typography>
                     <Typography color="#BBBABA" pt={1}>Please log in to continue</Typography>
                     <Box component='form'
-                        autoComplete="on"
+                        autoComplete="off"
                         onSubmit={handleSubmit()}>
                         <Stack direction='column'>
                             <FormControl sx={{ pt: 3}} id="username" >

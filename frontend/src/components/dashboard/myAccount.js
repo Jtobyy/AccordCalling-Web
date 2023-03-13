@@ -11,17 +11,36 @@ import callRecordsIcon from '../../images/callRecordsIcon.svg';
 import editProfileIcon from '../../images/editProfileIcon.svg';
 import changePasswordIcon from '../../images/changePasswordIcon.svg';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { ENDPOINTS, BASE_URL_VOIPSWITCH } from "../..";
+import axios from "axios";
+
 import ScrollToTopOnMount from "../scrolltoview";
 
 
 export default function MyAccount() {
     const username = sessionStorage.getItem('login')
-    const acctBalance = sessionStorage.getItem('creditBalance')
+    const [acctBalance, setAcctBalance] = useState(sessionStorage.getItem('creditBalance'))
     const phoneNumber = "..."
 
     const [loggedOut, setLoggedOut] = useState(false)
     
+    useEffect(() => {
+        axios.post(`${BASE_URL_VOIPSWITCH}${ENDPOINTS['getBalance']}`, {
+            clientType: 32,
+            clientId: sessionStorage.getItem('idClient'),
+            login: sessionStorage.getItem('login')
+        })
+        .then((res) => {
+            console.log(res)
+            sessionStorage.setItem('creditBalance', res['data']['creditBalance']);
+            setAcctBalance(res['data']['creditBalance']);
+        
+            console.log("Success")
+        })
+        .catch((err) => {console.log(err.message)})
+    });
+        
     const logout = () => {    
         sessionStorage.clear()
         setLoggedOut(true)

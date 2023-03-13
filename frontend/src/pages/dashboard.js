@@ -50,7 +50,7 @@ export default function Dashboard() {
                 else if (props.page == 'buyPlanSuccessful')
                     return <BuyPlanSuccessful />
                 else if (props.page == 'buyPlanFailed')
-                    return <BuyPlanFailed />
+                    return <BuyPlanFailed message={props.message} />
             })()}
         </Box>
     )

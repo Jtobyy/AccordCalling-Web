@@ -23,8 +23,9 @@ import 'axios-progress-bar/dist/nprogress.css';
 
 loadProgressBar();
 
-export const BASE_URL_VOIPSWITCH = "https://apps.nativetalk.com.ng:449/VS.WebAPI.Admin/"
-export const BASE_URL_VOIPSWITCH2 = "https://apps.nativetalk.com.ng:449/vsservices/api/json/syncreply/"
+export const BASE_URL_VOIPSWITCH = "https://apps.nativetalk.com.ng:451/VS.WebAPI.Admin/"
+export const BASE_URL_VOIPSWITCH2 = "https://apps.nativetalk.com.ng:451/vsservices/api/json/syncreply/"
+export const BACKEND = "https://apps.nativetalk.com.ng:453/"
 
 export const ENDPOINTS = { 
   'login': 'admin.client.login',
@@ -33,6 +34,10 @@ export const ENDPOINTS = {
   'getPassword': 'admin.client.password.get',
   'signup': 'admin.retail.create',
   'getBalance': 'admin.client.balance',
+  'getPlansList': 'admin.plans.list',
+  'getPlanData': 'admin.plan.get',
+  'addPlan': 'admin.client.plan.add',
+  'getStripeSecret': 'create-stripe-payment-intent',
 }
 
 class App extends React.Component {

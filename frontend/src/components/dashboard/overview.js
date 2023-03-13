@@ -9,10 +9,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import { BASE_URL_VOIPSWITCH, ENDPOINTS } from "../..";
+import ScrollToTopOnMount from "../scrolltoview";
 
 export default function Overview() {
     const firstName = sessionStorage.getItem('firstName')
     const [acctBalance, setAcctBalance] = useState(sessionStorage.getItem('creditBalance'))
+    const [noPlanSet, setNoPlanSet] = useState(0)
 
     console.log(sessionStorage.getItem('idClient'))
 
@@ -36,7 +38,8 @@ export default function Overview() {
     return (
         <Box component='div'
              sx={{ mt: {xs: 0, sm: -3}}}>
-            <Typography variant="h5" sx={{ py: {xs: 3, sm: 1}}} fontWeight={700}>Hello, {firstName}</Typography>
+             <ScrollToTopOnMount />   
+            <Typography mt={3} variant="h5" sx={{ py: {xs: 3, sm: 1}}} fontWeight={700}>Hello, {firstName}</Typography>
             <Box sx={{ bgcolor: 'white', borderRadius: 3, py: 1, px: 1.5 }}>
                 <Box px={3}  sx={{ display: 'flex', alignItems: 'center', bgcolor: '#E7F7E1', borderRadius: 3, py: 1 }}>
                     <Box>
@@ -55,8 +58,22 @@ export default function Overview() {
                     </RouterLink>
                 </Box>
             </Box>
-            <Typography variant="h6" sx={{ pb: {xs: 3, sm: 1}, pt: {xs: 3, sm: 2}}}  fontWeight={700}>Available Calling Plans</Typography>            
-            <Plans set={0} />
+            <Typography variant="h6" sx={{ pt: {xs: 3, sm: 2}}}  fontWeight={700}>Available Calling Plans</Typography>
+            <Box textAlign='center'>
+                {(() => {
+                    let plansList = [];
+                    for (let i = 0; i <= noPlanSet; i++) {
+                        plansList.push(<Plans key={i} set={i} />)
+                    }
+                    return <Box>{plansList}</Box>
+                })()}
+                <Button variant='contained' color='success'
+                    onClick={() => setNoPlanSet(noPlanSet + 1)}
+                    sx={{ textTransform: 'none', backgroundColor: '#8DC641', marginTop: 5,
+                        marginLeft: {xs: '10px'}, width: '180px' }}>
+                    See more
+                </Button>
+            </Box>
             
             <List sx={{ width: '100%', mt: 0, bgcolor: 'transparent' }}>
                     <ListItem

@@ -102,7 +102,7 @@ export default function Signin() {
                     <Typography variant='h3' pt={3} fontWeight={700} sx={{ fontSize: {xs: '2rem' }}}>Welcome Back!</Typography>
                     <Typography color="#BBBABA" pt={1}>Please log in to continue</Typography>
                     <Box component='form'
-                        autoComplete="off"
+                        autoComplete="on"
                         onSubmit={handleSubmit()}>
                         <Stack direction='column'>
                             <FormControl sx={{ pt: 3}} id="username" >

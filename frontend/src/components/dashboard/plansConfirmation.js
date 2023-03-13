@@ -4,20 +4,66 @@ import Button from "@mui/material/Button"
 import successIcon from '../../images/successIcon.svg';
 import failedIcon from '../../images/failed.svg';
 
-import { Link as RouterLink, useLocation } from "react-router-dom"
+import { Link as RouterLink, Navigate, useLocation } from "react-router-dom"
 
 import KeyboardBackspace from '@mui/icons-material/KeyboardBackspace';
+import ScrollToTopOnMount from "../scrolltoview";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+import { BASE_URL_VOIPSWITCH, ENDPOINTS } from "../..";
 
 export default function ConfirmBuyPlan(props) {
+    const [planDescription, setPlanDescription] = useState('');
+    const [madeRequest, setMadeRequest] = useState(false);
+    const [planStatus, setPlanStatus] = useState(false);
+    const [planStatusMessage, setPlanStatusMessage] = useState('');
 
+    useEffect(() => {
+        axios.post(`${BASE_URL_VOIPSWITCH}${ENDPOINTS['getPlanData']}`, {
+          id: props.plan
+        })
+        .then((res) => {
+          console.log(res['data'])
+          setPlanDescription(res['data']['plan']['name'])
+        })
+      })
+
+    const addPlan = () => {
+        axios.post(`${BASE_URL_VOIPSWITCH}${ENDPOINTS['addPlan']}`, {
+            clientId: sessionStorage.getItem('idClient'),
+            clientType: 32,
+            planId: props.plan
+          })
+          .then((res) => {
+            console.log(res['data'])
+            if (res['data']['status'] === -1) {
+                setPlanStatus(false)    
+                setMadeRequest(true)
+                setPlanStatusMessage(res['data']['responseStatus']['message'])
+            } else {
+                setPlanStatus(true)    
+                setMadeRequest(true)
+            }
+          })
+          .catch((err) => {console.log(err)})
+    }
+
+    if (madeRequest && planStatus) 
+        return <Navigate to='/Dashboard' state={{page: 'buyPlanSuccessful'}} />
+    if (madeRequest && !planStatus)
+        return <Navigate to='/Dashboard' 
+                state={{page: 'buyPlanFailed',
+                message: planStatusMessage}} />
+    else
     return (
         <Paper component="div"
                sx={{ display: 'flex', flexDirection: 'column',
                pt: 3, pb: 10, mt: 3, mx: 'auto', width: {xs: '90vw', sm: '600px'},
                borderRadius:4 }}>
-
+            <ScrollToTopOnMount />
             <Box display='flex' px={3} alignItems='center'>
-                <RouterLink to='/Dashboard' state={{page: 'addfunds' }} style={{ textDecoration: 'none', marginTop: '-24px' }}>
+                <RouterLink to='/Dashboard' state={{page: 'overview' }} style={{ textDecoration: 'none', marginTop: '-24px' }}>
                     <KeyboardBackspace sx={{ position: 'absolute' }}/>
                 </RouterLink>
                 <Typography variant="h5" fontWeight={700} sx={{ mx: 'auto'}}>Calling Plans</Typography>
@@ -26,15 +72,15 @@ export default function ConfirmBuyPlan(props) {
 
             <Box px={3}>
                 <Stack direction='column' pt={6} textAlign="center">
-                    <Typography variant="body1" fontWeight={700}>{props.country}</Typography>    
-                    <Typography variant="h5" fontWeight={700}>You are purchasing ${props.price} calling plan</Typography>
-                    <RouterLink to='/Dashboard' state={{page: 'buyPlanSuccessful' }}  style={{ textDecoration: 'none' }}>
-                        <Button  color='success' variant="contained"
-                        sx={{  mt: 7.5, py: 1.5, backgroundColor: '#8DC641', textTransform: 'none', width: '100%' }}>
-                            Confirm
-                        </Button>
-                    </RouterLink>
-                    <RouterLink to='/Dashboard' state={{page: 'buyPlanFailed' }}  style={{ textDecoration: 'none' }}>
+                    {/* <Typography variant="body1" fontWeight={700}>{props.country}</Typography>     */}
+                    <Typography variant="h5" fontWeight={700}>You are purchasing the calling plan: {planDescription}</Typography>
+                    {/* <RouterLink to='/Dashboard' state={{page: 'buyPlanSuccessful' }}  style={{ textDecoration: 'none' }}> */}
+                    <Button onClick={addPlan} color='success' variant="contained"
+                    sx={{  mt: 7.5, py: 1.5, backgroundColor: '#8DC641', textTransform: 'none', width: '100%' }}>
+                        Confirm
+                    </Button>
+                    {/* </RouterLink> */}
+                    <RouterLink to='/Dashboard' state={{page: 'overview' }}  style={{ textDecoration: 'none' }}>
                         <Button  color='success' variant="outlined"
                         sx={{  mt: 3, py: 1.5, color: '#8DC641', borderColor: '#8DC641', textTransform: 'none', width: '100%' }}>
                             Cancel
@@ -68,6 +114,7 @@ export function BuyPlanSuccessful() {
                         mx='auto'
                         src={successIcon} />
                 <Typography variant="h5" fontWeight={700}>Success!</Typography>    
+                <Typography variant="body1" fontWeight={700}>Plan has been added to your account</Typography>
                 <RouterLink to='/Dashboard' state={{page: 'myaccount' }}  style={{ textDecoration: 'none' }}>
                     <Button  color='success' variant="contained"
                     sx={{  mt: 7.5, py: 1.5, backgroundColor: '#8DC641', textTransform: 'none', width: '100%' }}>
@@ -80,7 +127,7 @@ export function BuyPlanSuccessful() {
     )
 }
 
-export function BuyPlanFailed() {
+export function BuyPlanFailed(props) {
     return (
             <Paper component="div"
             sx={{ display: 'flex', flexDirection: 'column',
@@ -101,8 +148,8 @@ export function BuyPlanFailed() {
                         width={120}
                         mx='auto'
                         src={failedIcon} />
-                <Typography variant="h5" pt={3} fontWeight={700}>Insufficient funds</Typography>    
-                <Typography variant="body1" >Sorry! You do not have sufficient balance </Typography>
+                <Typography variant="h5" pt={3} fontWeight={700}>Request not successful</Typography>    
+                <Typography variant="body1" >{props.message}</Typography>
                 <RouterLink to='/Dashboard' state={{page: 'addfunds' }}  style={{ textDecoration: 'none' }}>
                     <Button  color='success' variant="contained"
                     sx={{  mt: 7.5, py: 1.5, backgroundColor: '#8DC641', textTransform: 'none', width: '100%' }}>

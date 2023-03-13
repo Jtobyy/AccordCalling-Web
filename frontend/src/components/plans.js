@@ -12,9 +12,6 @@ import gh from '../images/GH.png';
 
 import { Link as RouterLink } from 'react-router-dom';
 
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-
 
 const countries = ['NIGERIA', 'GHANA', 'TANZANIA']
 const flags = [ng, gh, tz]
@@ -24,15 +21,18 @@ const plansArray = [
     price: '10',
     code: '0',
     descriptions: ['FOR 250MINS', 'FOR 250MINS', 'FOR 150MINS'],
+    planIds: ['6', '7', '8']
   },  {
       price: '5',
       code: '0',
-      descriptions: ['FOR 250MINS', 'FOR 250MINS', 'FOR 150MINS'],
+      descriptions: ['FOR 60MINS', 'FOR 60MINS', 'FOR 30MINS'],
+      planIds: ['9', '10', '11']
   }
 ]
 
 
 export default function Plans(props) {
+
   if (props.set >= plansArray.length) return
   const plans = plansArray[props.set]
   // const [checked, setChecked] = React.useState(false);
@@ -44,7 +44,8 @@ export default function Plans(props) {
         let price = plans.price;
         let description = plans.descriptions[index];
         let flagSrc = flags[index];
-        let planCode = country + plans.code
+        let planId = plans.planIds[index];
+        // let planCode = country + plans.code
 
         return (
             <Grid
@@ -90,7 +91,7 @@ export default function Plans(props) {
 
                 <CardActions sx={{ 'display': 'flex', justifyContent: 'center'}}>
                   <RouterLink to="/Dashboard" 
-                  state={{ page: 'confirmBuyPlan', plan: planCode, price: price, country: country }} 
+                  state={{ page: 'confirmBuyPlan', plan: planId, price: price, country: country }} 
                   style={{ textDecoration: 'none', width: '100%' }}>
                     <Button color='success' 
                             variant="contained" 

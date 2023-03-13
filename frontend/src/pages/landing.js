@@ -125,7 +125,7 @@ export default function Landing() {
           </Grid>
 
           <Grid item xs={12} sm={6}>
-            <Box component="img" sx={{ height: {xs: '100%', md: 'calc(90% + 15px)', lg: 'calc(100% + 5px)'}, width: {xs: 'calc(50vh - 135px)', sm: 400, md: 'calc(90% - 85px)'},  
+            <Box loading='lazy' component="img" sx={{ height: {xs: '100%', md: 'calc(90% + 15px)', lg: 'calc(100% + 5px)'}, width: {xs: 'calc(50vh - 135px)', sm: 400, md: 'calc(90% - 85px)'},  
                                   ml: {xs: 5, sm: -1}, mt: {xs: -1.5, sm: -1 } }} src = {landingImage2} />
           </Grid>
         </Grid>
@@ -181,7 +181,7 @@ export default function Landing() {
             <Card>
               <CardMedia component='iframe'
                           height="450"
-                          src='https://youtube.com/embed/mHTc7FV6jsI?feature=share' />
+                          src='https://youtube.com/embed/Um7xfsF82T0' />
             </Card>
             
             

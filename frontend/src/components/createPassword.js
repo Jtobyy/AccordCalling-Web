@@ -11,7 +11,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 
-import React from "react";
+import React, { useEffect } from "react";
 
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 
@@ -34,6 +34,10 @@ export default function CreatePassword() {
     const [validPassword, setValidPassword] = React.useState(true);
     const [validPasswordConfirmation, setValidPasswordConfirmation] = React.useState(true);
 
+
+    useEffect(() => {
+        document.getElementById('recaptchaContainer').style.visibility = 'hidden'
+    })
     const handleClickShowPassword = () => setShowPassword((show) => !show);    
 
     const handleSubmit = (e) => {

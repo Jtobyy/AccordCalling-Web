@@ -19,13 +19,20 @@ import NotFound from './pages/notFound';
 
 import { loadProgressBar } from 'axios-progress-bar';
 import 'axios-progress-bar/dist/nprogress.css';
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from '@stripe/react-stripe-js';
 
 
 loadProgressBar();
 
-export const BASE_URL_VOIPSWITCH = "https://apps.nativetalk.com.ng:451/VS.WebAPI.Admin/"
-export const BASE_URL_VOIPSWITCH2 = "https://apps.nativetalk.com.ng:451/vsservices/api/json/syncreply/"
+// Production
+export const BASE_URL_VOIPSWITCH = "https://apps.nativetalk.com.ng:449/VS.WebAPI.Admin/"
+export const BASE_URL_VOIPSWITCH2 = "https://apps.nativetalk.com.ng:449/vsservices/api/json/syncreply/"
 export const BACKEND = "https://apps.nativetalk.com.ng:453/"
+
+// export const BASE_URL_VOIPSWITCH = "https://apps.nativetalk.com.ng:451/VS.WebAPI.Admin/"
+// export const BASE_URL_VOIPSWITCH2 = "https://apps.nativetalk.com.ng:451/vsservices/api/json/syncreply/"
+// export const BACKEND = "https://apps.nativetalk.com.ng:455/"
 
 export const ENDPOINTS = { 
   'login': 'admin.client.login',
@@ -38,13 +45,18 @@ export const ENDPOINTS = {
   'getPlanData': 'admin.plan.get',
   'addPlan': 'admin.client.plan.add',
   'getStripeSecret': 'create-stripe-payment-intent',
+  'addFunds': 'admin.payment.add',
 }
+
+const stripePromise = loadStripe('pk_test_639vTqpH8drhhebhuDK8WQeg')
 
 class App extends React.Component {
   render() {
     return (
+      
       <Router>
         <div>
+        
           <Routes>
             <Route path='/' element={<Landing />}></Route>
             <Route path='/Signin' element={<Signin />}></Route>
@@ -56,14 +68,18 @@ class App extends React.Component {
 
             <Route path="*" element={<NotFound />} />            
           </Routes>
+        
         </div>
       </Router>
+      
     )
   }  
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <App />
+  <Elements stripe={stripePromise}>
+    <App />
+  </Elements>
 );
 
 // If you want to start measuring performance in your app, pass a function

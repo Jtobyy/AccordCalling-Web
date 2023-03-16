@@ -12,6 +12,9 @@ import { countries } from "../countries";
 import axios from 'axios';
 import ScrollToTopOnMount from "./scrolltoview";
 
+// Import the functions you need from the SDKs you need
+
+
 
 export default function Signup() {
     const [country, setCountry] = useState('+1');
@@ -20,7 +23,10 @@ export default function Signup() {
 
     const [verify, setVerify] = useState(false);
 
-    const handleSubmit = (e) => {
+    useEffect(() => {
+        document.getElementById('recaptchaContainer').style.visibility = 'hidden'
+    })
+    const handleSubmit = (e) => {      
         e.preventDefault()
 
         sessionStorage.setItem('country', country)

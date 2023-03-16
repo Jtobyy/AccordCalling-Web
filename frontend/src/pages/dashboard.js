@@ -4,7 +4,7 @@ import Header from "../components/header"
 import { Navigate, useLocation } from "react-router-dom";
 
 import Overview from "../components/dashboard/overview";
-import AddFunds, { AddFundsSuccessful } from "../components/dashboard/addFunds";
+import AddFunds, { AddFundsSuccessful, AddFundsFailed } from "../components/dashboard/addFunds";
 import ConfirmAddFunds from "../components/dashboard/confirmAddFunds";
 import MyAccount from "../components/dashboard/myAccount";
 import EditProfile from "../components/dashboard/editProfile";
@@ -12,6 +12,7 @@ import ChangePassword from "../components/dashboard/changePassword";
 import ContactSupport from "../components/dashboard/contactSupport";
 import CallRecords from "../components/dashboard/callRecords";
 import ConfirmBuyPlan, { BuyPlanFailed, BuyPlanSuccessful } from "../components/dashboard/plansConfirmation";
+import { CheckoutForm } from "../components/dashboard/checkoutForm";
 
 
 export default function Dashboard() {
@@ -29,10 +30,14 @@ export default function Dashboard() {
                     return <Overview />
                 else if (props.page == 'addfunds')
                     return <AddFunds />
+                else if (props.page == 'makePayment')
+                    return <CheckoutForm amount={props.amount} />
                 else if (props.page == 'confirmAddFunds')
                     return <ConfirmAddFunds />
                 else if (props.page == 'addFundsSuccessful')
                     return <AddFundsSuccessful />
+                else if (props.page == 'addFundsFaile')
+                    return <AddFundsFailed />
                 else if (props.page == 'myaccount')
                     return <MyAccount />
                 else if (props.page == 'editprofile')

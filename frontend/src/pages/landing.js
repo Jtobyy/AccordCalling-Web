@@ -12,11 +12,12 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
-import Container from '@mui/material/Container';
+
 import Box from '@mui/material/Box';
 
 import { Link as RouterLink } from 'react-router-dom';
 import { ButtonGroup, Card, CardMedia } from '@mui/material';
+import { HashLink } from "react-router-hash-link";
 
 // import useMediaQuery from '@mui/material/useMediaQuery';
 
@@ -24,7 +25,7 @@ import Plans from '../components/plans';
 import Footer from '../components/footer';
 import ScrollToTopOnMount from "../components/scrolltoview";
 import background from "../images/background.png";
-import greenBtn from "../images/greenBtn.png";
+
 
 // export function SimpleMediaQuery() {
 //   const matches = useMediaQuery('(max-height:650px)');
@@ -35,6 +36,23 @@ import greenBtn from "../images/greenBtn.png";
 export default function Landing() {
   const [noPlanSet, setNoPlanSet] = React.useState(0)
 
+  const reveal = () => {
+    let reveals = document.querySelectorAll(".reveal");
+
+    for (var i = 0; i < reveals.length; i++) {
+      let windowHeight = window.innerHeight;
+      let elementTop = reveals[i].getBoundingClientRect().top;
+      let elementVisible = 100;
+
+      if (elementTop < windowHeight - elementVisible)
+        reveals[i].classList.add('active');
+      else
+      reveals[i].classList.remove('active');
+    }
+  }
+  React.useEffect(() => { 
+    window.addEventListener('scroll', reveal);
+  })
   return (
     <div>
         <ScrollToTopOnMount />
@@ -48,22 +66,19 @@ export default function Landing() {
           <Toolbar sx={{ flexWrap: 'wrap' }}>
             <img src={logo} alt='' />
               <nav>
-                <Link
-                  color="text.primary"
-                  href="#plans"
-                  underline='none'
-                  sx={{ mr: 3, ml: 6 }}
+                <HashLink smooth 
+                style={{ textDecoration: 'none', 
+                          color: 'black',
+                          marginRight: '30px',
+                          marginLeft: '60px',
+                        }} to="/#plansBox"
                 >
                   Plans
-                </Link>
-                <Link
-                  color="text.primary"
-                  href="#footer"
-                  underline='none'
-                  sx={{  mx: 1.5 }}
-                >
+                </HashLink>
+                
+                <HashLink smooth style={{ textDecoration: 'none', color: 'black'}} to="/#footer">
                   Download App
-                </Link>
+                </HashLink>
               </nav>
 
             <ButtonGroup sx={{ marginLeft: 'auto' }}>
@@ -131,7 +146,7 @@ export default function Landing() {
         </Grid>
       </Box>
 
-      <Box textAlign='center' sx={{ pt: 10, px: { md: 10 }}} id="plansBox">
+      <Box component='div' className='reveal' textAlign='center' sx={{ pt: 10, px: { md: 10 }}} id="plansBox">
         <Typography variant='h4' fontWeight="700" textAlign='center' py={1}>
           Call Plans
         </Typography>
@@ -151,7 +166,7 @@ export default function Landing() {
         </Button>
       </Box>
         
-      <Box disableGutters >
+      <Box component='div' className='reveal' disableGutters >
         <Grid container spacing={2} 
                       sx={{ pt: {xs: 20, sm: 18, height: '100vh'},
                       px: { sm: 10} }}>
@@ -189,7 +204,7 @@ export default function Landing() {
         </Grid>
       </Box>
       
-      <Box 
+      <Box className='reveal'
           component="footer"
           sx={{
             borderTop: (theme) => `1px solid ${theme.palette.divider}`,

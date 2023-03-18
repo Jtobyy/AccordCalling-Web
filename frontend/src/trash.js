@@ -137,7 +137,7 @@ export const CheckoutForm = (props) => {
         console.log(clientSecret)
     })
     .catch((err) => {console.log(err.message)})
-    }, [props.amount])
+    }, [props.amount])ver
 
 
   const handleChange = async (event) => {

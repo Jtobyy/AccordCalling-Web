@@ -19,12 +19,10 @@ const flags = [ng, gh, tz]
 const plansArray = [
   {
     price: '10',
-    code: '0',
     descriptions: ['FOR 250MINS', 'FOR 250MINS', 'FOR 150MINS'],
     planIds: ['6', '7', '8']
   },  {
       price: '5',
-      code: '0',
       descriptions: ['FOR 60MINS', 'FOR 60MINS', 'FOR 30MINS'],
       planIds: ['9', '10', '11']
   }
@@ -45,7 +43,6 @@ export default function Plans(props) {
         let description = plans.descriptions[index];
         let flagSrc = flags[index];
         let planId = plans.planIds[index];
-        // let planCode = country + plans.code
 
         return (
             <Grid

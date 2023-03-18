@@ -50,6 +50,7 @@ export default function Signin() {
                 sessionStorage.setItem('firstName', res['data']['firstName'])
                 sessionStorage.setItem('lastName', res['data']['lastName'])
                 sessionStorage.setItem('login', login)
+                sessionStorage.setItem('password', password)
                 sessionStorage.setItem('idClient', res['data']['idClient'])
                 sessionStorage.setItem('creditBalance', res['data']['creditBalance'])
                 sessionStorage.setItem('email', res['data']['email'])

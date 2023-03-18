@@ -26,13 +26,13 @@ import { Elements } from '@stripe/react-stripe-js';
 loadProgressBar();
 
 // Production
-export const BASE_URL_VOIPSWITCH = "https://apps.nativetalk.com.ng:449/VS.WebAPI.Admin/"
-export const BASE_URL_VOIPSWITCH2 = "https://apps.nativetalk.com.ng:449/vsservices/api/json/syncreply/"
-export const BACKEND = "https://apps.nativetalk.com.ng:453/"
+// export const BASE_URL_VOIPSWITCH = "https://apps.nativetalk.com.ng:449/VS.WebAPI.Admin/"
+// export const BASE_URL_VOIPSWITCH2 = "https://apps.nativetalk.com.ng:449/vsservices/api/json/syncreply/"
+// export const BACKEND = "https://apps.nativetalk.com.ng:453/"
 
-// export const BASE_URL_VOIPSWITCH = "https://apps.nativetalk.com.ng:451/VS.WebAPI.Admin/"
-// export const BASE_URL_VOIPSWITCH2 = "https://apps.nativetalk.com.ng:451/vsservices/api/json/syncreply/"
-// export const BACKEND = "https://apps.nativetalk.com.ng:455/"
+export const BASE_URL_VOIPSWITCH = "https://apps.nativetalk.com.ng:451/VS.WebAPI.Admin/"
+export const BASE_URL_VOIPSWITCH2 = "https://apps.nativetalk.com.ng:451/vsservices/api/json/syncreply/"
+export const BACKEND = "https://apps.nativetalk.com.ng:455/"
 
 export const ENDPOINTS = { 
   'login': 'admin.client.login',
@@ -46,6 +46,9 @@ export const ENDPOINTS = {
   'addPlan': 'admin.client.plan.add',
   'getStripeSecret': 'create-stripe-payment-intent',
   'addFunds': 'admin.payment.add',
+  'setDid': 'admin.client.techprefix.set',
+  'getNumberList': 'admin.did.local.number.list',
+  'buyNumber': 'client.dids.numbers.buy',
 }
 
 const stripePromise = loadStripe('pk_test_639vTqpH8drhhebhuDK8WQeg')

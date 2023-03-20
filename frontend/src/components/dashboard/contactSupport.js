@@ -41,7 +41,7 @@ export default function ContactSupport() {
                                 key={0}
                                 sx={{ mt: 1, bgcolor: 'background.paper', borderRadius: 3}}
                                 >
-                                <Link display='flex' alignItems='center' href="tel:+234 803 567 0547">
+                                <Link display='flex' alignItems='center' href="https://api.whatsapp.com/send?phone=08039673599">
                                     <ListItemIcon>
                                             <Box component='img'
                                                 width='40px'                            

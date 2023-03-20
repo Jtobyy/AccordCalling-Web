@@ -53,7 +53,7 @@ export default function Dashboard() {
                 else if (props.page == 'confirmBuyPlan')
                     return <ConfirmBuyPlan plan={props.plan} price={props.price} country={props.country} />
                 else if (props.page == 'buyPlanSuccessful')
-                    return <BuyPlanSuccessful />
+                    return <BuyPlanSuccessful number={props.number} />
                 else if (props.page == 'buyPlanFailed')
                     return <BuyPlanFailed message={props.message} />
             })()}

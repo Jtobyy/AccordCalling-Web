@@ -16,7 +16,7 @@ export default function Overview() {
     const [acctBalance, setAcctBalance] = useState(sessionStorage.getItem('creditBalance'))
     const [noPlanSet, setNoPlanSet] = useState(0)
 
-    console.log(sessionStorage.getItem('idClient'))
+    // console.log(sessionStorage.getItem('idClient'))
 
     useEffect(() => {
         axios.post(`${BASE_URL_VOIPSWITCH}${ENDPOINTS['getBalance']}`, {
@@ -25,11 +25,11 @@ export default function Overview() {
             login: sessionStorage.getItem('login')
         })
         .then((res) => {
-            console.log(res)
+            // console.log(res)
             sessionStorage.setItem('creditBalance', res['data']['creditBalance']);
             setAcctBalance(res['data']['creditBalance']);
         
-            console.log("Success")
+            // console.log("Success")
         })
         .catch((err) => {console.log(err.message)})
     });

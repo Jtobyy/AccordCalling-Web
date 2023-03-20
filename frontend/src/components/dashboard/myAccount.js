@@ -32,11 +32,11 @@ export default function MyAccount() {
             login: sessionStorage.getItem('login')
         })
         .then((res) => {
-            console.log(res)
+            // console.log(res)
             sessionStorage.setItem('creditBalance', res['data']['creditBalance']);
             setAcctBalance(res['data']['creditBalance']);
         
-            console.log("Success")
+            // console.log("Success")
         })
         .catch((err) => {console.log(err.message)})
     });

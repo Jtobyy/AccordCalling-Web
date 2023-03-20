@@ -4,7 +4,7 @@ import Button from "@mui/material/Button"
 import successIcon from '../../images/successIcon.svg';
 import failedIcon from '../../images/failed.svg';
 
-import { Link as RouterLink, Navigate, useLocation } from "react-router-dom"
+import { Link as RouterLink, Navigate, useAsyncError, useLocation } from "react-router-dom"
 
 import KeyboardBackspace from '@mui/icons-material/KeyboardBackspace';
 import ScrollToTopOnMount from "../scrolltoview";
@@ -13,12 +13,13 @@ import axios from "axios";
 import { CircularProgress } from "@mui/material";
 
 import { BASE_URL_VOIPSWITCH, BASE_URL_VOIPSWITCH2, ENDPOINTS } from "../..";
-import { convertLength } from "@mui/material/styles/cssUtils";
+import sha1 from 'js-sha1';
 
 export default function ConfirmBuyPlan(props) {
     const [planDescription, setPlanDescription] = useState('');
     const [madeRequest, setMadeRequest] = useState(false);
     const [planStatus, setPlanStatus] = useState(false);
+    const [number2, setNumber] = useState('')
     const [planStatusMessage, setPlanStatusMessage] = useState('');
 
     if (planDescription !== "") {
@@ -30,7 +31,7 @@ export default function ConfirmBuyPlan(props) {
           id: props.plan
         })
         .then((res) => {
-          console.log(res['data'])
+        //   console.log(res['data'])
           setPlanDescription(res['data']['plan']['name'])
         })
       })
@@ -47,22 +48,46 @@ export default function ConfirmBuyPlan(props) {
                     "pageSize":0
                   })
                   .then((res) => {
-                    const number = res['data']['data'][0]['number']
-                    console.log(number)
-                    techPrefix=`CP:!${number};DP:0->234 OR +->;TP:`
+                    let  i = -1;
+                    let number = ''
+                    do {
+                        i++    
+                        number = res['data']['data'][i]['number']
+                    } while(res['data']['data'][i]['status'] !== "Available" 
+                            && i < (res['data']['data']).length - 1);
+                    
+                    if (res['data']['data'].length - 1 === i)  {
+                        if (res['data']['data'][i]['status'] === "Available" ) {
+                            alert('no numbers available')
+                        }
+                    } else {
+                        // console.log(number)
+                        setNumber(number)
+                        techPrefix=`CP:!${number};DP:0->234 OR +->;TP:`
+                        let authorization = "Basic " + btoa(sessionStorage.getItem('login') + ":" + sha1(sessionStorage.getItem("password")))
+                        // console.log(authorization)
 
-                    axios.post(`${BASE_URL_VOIPSWITCH2}${ENDPOINTS['buyNumber']}`, {
-                        "countryId":17, "purches": [
-                            {"quantity":1,"phoneNumber":number, "areaCode":"01", "countryPhoneCode":"234", "countryCode":"234", "areaName":"", "voxboneGroupId":0,"localAreaId":0,"cnam":"", "channels":0,"dIDWWUniqueCode":"", "nPA":"", "nXX":"", "city":"", "stateCode":"", "phoneGroup":"", "resellerId":84,"resellerLevel":0}],"resellerDb":"String", "promotion":false,"resellerRetailClient":"84", "subscription":false
-                      }, { headers: { "Authorization": sessionStorage.getItem('login') + ":" + sessionStorage.getItem("password")}
-                      })
-                      .then((res) => {
-                        console.log('resp from buyNumber ', res)
-                      })
-                      .catch((err) => {
-                        alert('incoming call number not setup')
-                        console.log(err)
-                      })
+                        axios.post(`${BASE_URL_VOIPSWITCH2}${ENDPOINTS['buyNumber']}`, {
+                            "countryId":17, "purches": [
+                                {"quantity":1,"phoneNumber":number, "areaCode":"01", "countryPhoneCode":"234", "countryCode":"234", "areaName":"", "voxboneGroupId":0,"localAreaId":0,"cnam":"", "channels":0,"dIDWWUniqueCode":"", "nPA":"", "nXX":"", "city":"", "stateCode":"", "phoneGroup":"", "resellerId":84,"resellerLevel":0}],"resellerDb":"", "promotion":false,"resellerRetailClient":"", "subscription":false
+                          }, { headers: { 
+                            "Authorization": authorization}
+                          })
+                          .then((res) => {
+                            // console.log(res['data']['data'][0]['status'])
+                            if (res['data']['data'][0]['status']) {
+                                alert('incoming number attached.')
+                                // console.log(res['data']['data'][0]['did'])
+                                // console.log('resp from buyNumber ', res)
+                            }
+                            else alert(res['data']['data'][0]['message'])
+                          })
+                          .catch((err) => {
+                            alert('incoming call number error')
+                            console.log(err)
+                            
+                          })
+                    }
 
                   })    
                   .catch((err) => {
@@ -87,7 +112,7 @@ export default function ConfirmBuyPlan(props) {
                 else {
                     setPlanStatus(true)
                     setMadeRequest(true)    
-                    alert('number linked successfully')
+                    alert('outgoing number linked successfully')
                 }
                 
             })
@@ -108,7 +133,7 @@ export default function ConfirmBuyPlan(props) {
             planId: props.plan
           })
           .then((res) => {
-            console.log(res['data'])
+            // console.log(res['data'])
             if (res['data']['status'] === -1) {
                 setPlanStatus(false)    
                 setMadeRequest(true)
@@ -121,7 +146,7 @@ export default function ConfirmBuyPlan(props) {
     }
 
     if (madeRequest && planStatus) 
-        return <Navigate to='/Dashboard' state={{page: 'buyPlanSuccessful'}} />
+        return <Navigate to='/Dashboard' state={{page: 'buyPlanSuccessful', number: number2}} />
     else if (madeRequest && !planStatus)
         return <Navigate to='/Dashboard' 
                 state={{page: 'buyPlanFailed',
@@ -164,7 +189,7 @@ export default function ConfirmBuyPlan(props) {
     )
 }
 
-export function BuyPlanSuccessful() {
+export function BuyPlanSuccessful(props) {
     return (
             <Paper component="div"
             sx={{ display: 'flex', flexDirection: 'column',
@@ -187,6 +212,14 @@ export function BuyPlanSuccessful() {
                                 src={successIcon} />
                         <Typography variant="h5" fontWeight={700}>Success!</Typography>    
                         <Typography variant="body1" fontWeight={700}>Plan has been added to your account</Typography>
+                        {(() => { 
+                            if (props.number) {
+                                return (
+                                        <Typography variant="body1" mt={2}>
+                                            Your number is: <Typography variant="h4">{props.number}</Typography>
+                                        </Typography>)
+                            }})()}
+                        
                         <RouterLink to='/Dashboard' state={{page: 'myaccount' }}  style={{ textDecoration: 'none' }}>
                             <Button  color='success' variant="contained"
                             sx={{  mt: 7.5, py: 1.5, backgroundColor: '#8DC641', textTransform: 'none', width: '100%' }}>

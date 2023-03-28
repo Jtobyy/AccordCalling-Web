@@ -47,7 +47,7 @@ export default function ContactSupport() {
                                                 width='40px'                            
                                                 src={callIcon} />
                                     </ListItemIcon>    
-                                    <ListItemText  primary="+234 803 567 0547" />
+                                    <ListItemText  primary="+234 803 967 3599" />
                                 </Link>    
                                 </ListItem>
                                 <ListItem

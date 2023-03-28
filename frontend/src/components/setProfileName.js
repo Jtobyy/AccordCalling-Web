@@ -66,6 +66,8 @@ export default function ProfileName(props) {
                     sessionStorage.setItem('firstName', firstName)
 
                 setSuccess(true)
+                sessionStorage.setItem('password', props.password)
+                
                 console.log("Success")    
             }
         })

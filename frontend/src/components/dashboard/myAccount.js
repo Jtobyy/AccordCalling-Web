@@ -12,16 +12,18 @@ import editProfileIcon from '../../images/editProfileIcon.svg';
 import changePasswordIcon from '../../images/changePasswordIcon.svg';
 
 import { useState, useEffect } from "react";
-import { ENDPOINTS, BASE_URL_VOIPSWITCH } from "../..";
+import { ENDPOINTS, BASE_URL_VOIPSWITCH, BASE_URL_VOIPSWITCH2 } from "../..";
 import axios from "axios";
+import { SHA1 } from "../../sha1";
+import sha1 from 'js-sha1';
 
 import ScrollToTopOnMount from "../scrolltoview";
 
-
 export default function MyAccount() {
     const username = sessionStorage.getItem('login')
+    const firstName = sessionStorage.getItem('firstName')
     const [acctBalance, setAcctBalance] = useState(sessionStorage.getItem('creditBalance'))
-    const phoneNumber = "..."
+    const [phoneNumber, setPhoneNumber] = useState("...")
 
     const [loggedOut, setLoggedOut] = useState(false)
     
@@ -39,7 +41,28 @@ export default function MyAccount() {
             // console.log("Success")
         })
         .catch((err) => {console.log(err.message)})
-    });
+
+        // // Get client Did
+        let authorization = ""
+        if (sessionStorage.getItem("password"))
+            authorization = "Basic " + btoa(sessionStorage.getItem('login') + ":" + sha1(sessionStorage.getItem("password")))
+        else alert('re-login to sync data')
+        
+        console.log(authorization)
+        axios.post(`${BASE_URL_VOIPSWITCH2}${ENDPOINTS['getClientDid']}`, {
+            onlyAssigned: false,
+            resellerDb: ""
+        }, { headers: { 
+            "Authorization": authorization}
+        })
+        .then((res) => {
+            // console.log(res)
+            // console.log(res["data"]["data"][0]["phoneNumber"])
+            setPhoneNumber(res["data"]["data"][0]["phoneNumber"])
+        })
+        .catch((err) => {console.log(err.message)})
+    })
+
         
     const logout = () => {    
         sessionStorage.clear()
@@ -69,7 +92,7 @@ export default function MyAccount() {
                 <Box fontSize="80px" >
                     <AccountCircle fontSize="inherit" />
                 </Box>
-                <Typography variant="h6" mt={-2} >{username}</Typography>
+                <Typography variant="h6" mt={-2} >{firstName || username}</Typography>
                 <Typography variant="body2" color='#929292'>{phoneNumber}</Typography>
 
                 <Container  sx={{ display: 'flex', bgcolor: '#E7F7E1', borderRadius: 3, py: 1, mt: 3 }}>

@@ -64,7 +64,12 @@ export default function ConfirmBuyPlan(props) {
                         // console.log(number)
                         setNumber(number)
                         techPrefix=`CP:!${number};DP:0->234 OR +->;TP:`
-                        let authorization = "Basic " + btoa(sessionStorage.getItem('login') + ":" + sha1(sessionStorage.getItem("password")))
+                        let authorization = ""
+
+                        if (sessionStorage.getItem("password"))
+                            authorization = "Basic " + btoa(sessionStorage.getItem('login') + ":" + sha1(sessionStorage.getItem("password")))
+                        else alert('password missing, please re-login to sync data.')
+                        
                         // console.log(authorization)
 
                         axios.post(`${BASE_URL_VOIPSWITCH2}${ENDPOINTS['buyNumber']}`, {

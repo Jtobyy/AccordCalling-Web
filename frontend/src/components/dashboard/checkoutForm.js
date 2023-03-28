@@ -100,7 +100,10 @@ export function CheckoutForm(props) {
         .then((res) => {
           setPaymentSuccess(true)
         })
-        .catch((err) => (console.log(err)))
+        .catch((err) => {
+          console.log(err)
+          document.getElementById("circularProgress").style.visibility = "hidden"
+        })
       } 
     }
     

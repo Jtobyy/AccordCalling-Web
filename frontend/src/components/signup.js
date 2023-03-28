@@ -85,7 +85,7 @@ export default function Signup() {
                     </Stack>
                     
                     <Typography variant="body2" mt={3} color="#2E368F">
-                        We will be sending a 4 digit verification code to the number provided
+                        We will be sending an otp verification code to the number provided
                     </Typography>
                     
                     <Button onClick={(e) => handleSubmit(e)} color='success' variant="contained"

@@ -19,8 +19,8 @@ import { CircularProgress } from "@mui/material";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: "AIzaSyCmc2Wb3MHYBsru4MJ0Ej8fCS5anPnM5cE",
-    // authDomain: "localhost",
-    authDomain: "accordcalling.nativetalkapp.com",
+    authDomain: "localhost",
+    // authDomain: "accordcalling.nativetalkapp.com",
     projectId: "accordcalling-web",
     storageBucket: "accordcalling-web.appspot.com",
     messagingSenderId: "111446254273",
@@ -61,7 +61,7 @@ export default function Otp() {
         }, auth);
 
         const appVerifier = window.recaptchaVerifier
-        signInWithPhoneNumber(auth, "+2348161883639", appVerifier)
+        signInWithPhoneNumber(auth, sessionStorage.getItem('number'), appVerifier)
         .then((confirmationResult) => {
         // SMS sent. Prompt user to type the code from the message, then sign the
         // user in with confirmationResult.confirm(code).

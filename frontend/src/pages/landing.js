@@ -150,6 +150,9 @@ export default function Landing() {
         <Typography variant='h4' fontWeight="700" textAlign='center' py={1}>
           Call Plans
         </Typography>
+        <Typography varinat='body1'>
+        Our call plans operate on a subscription based model where users pay a recurring fee to  maintain an uninterrupted access to our call services"
+        </Typography>
         {(() => {
           let plansList = [];
           for (let i = 0; i <= noPlanSet; i++) {

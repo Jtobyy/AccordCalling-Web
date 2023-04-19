@@ -59,7 +59,7 @@ export default function ProfileName(props) {
                 console.log('got here')
                 sessionStorage.setItem('token', randomToken.create('oijfsdsf9284249df82048f0wfj0wj0w8f24jf')(20))
 
-                sessionStorage.setItem('login', res['data']['idClient'])
+                sessionStorage.setItem('login', res['data']['login'])
                 sessionStorage.setItem('idClient', res['data']['idClient'])
                 
                 if (firstName !== "")

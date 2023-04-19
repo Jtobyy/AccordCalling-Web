@@ -41,26 +41,26 @@ export default function ContactSupport() {
                                 key={0}
                                 sx={{ mt: 1, bgcolor: 'background.paper', borderRadius: 3}}
                                 >
-                                <Link display='flex' alignItems='center' href="https://api.whatsapp.com/send?phone=08039673599">
+                                <Link display='flex' alignItems='center' href="https://api.whatsapp.com/send?phone=2349088999153">
                                     <ListItemIcon>
                                             <Box component='img'
                                                 width='40px'                            
                                                 src={callIcon} />
                                     </ListItemIcon>    
-                                    <ListItemText  primary="+234 803 967 3599" />
+                                    <ListItemText  primary="+234 908 899 9153" />
                                 </Link>    
                                 </ListItem>
                                 <ListItem
                                 key={1}
                                 sx={{ bgcolor: 'background.paper', borderRadius: 3}}
                                 >
-                                <Link display='flex' alignItems='center' href="mailto:hello@accordcalling.io">     
+                                <Link display='flex' alignItems='center' href="mailto:support@accordcalling.io">     
                                     <ListItemIcon>
                                             <Box component='img'
                                                 width='40px'                            
                                                 src={emailIcon} />
                                     </ListItemIcon>  
-                                    <ListItemText primary="hello@accordcalling.io" />
+                                    <ListItemText primary="support@accordcalling.io" />
                                 </Link>
                                 </ListItem>
                         </List>    

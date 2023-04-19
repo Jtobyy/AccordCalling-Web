@@ -1,4 +1,4 @@
-import { Paper, Typography, Box, Stack, FormControl } from "@mui/material";
+import { Paper, Typography, Box } from "@mui/material";
 import successIcon from '../images/successIcon.svg';
 import icon2 from '../images/padlock.svg';
 
@@ -23,6 +23,8 @@ export default function TellStatus(props) {
                     mx='auto'
                     src={successIcon} />
                 <Typography variant="h5" fontWeight={700} textAlign='center'>Your account has been created successfully</Typography>
+                <Typography variant="h5" fontWeight={700} textAlign='center'>Your username is {sessionStorage.getItem('login')}</Typography>
+
                 {/* <Typography variant="body2" mt={3} textAlign='center'>Your free Accord Number is</Typography> */}
                 {/* <Typography variant="h5" mt={1} fontWeight={700} textAlign='center'>0700 756 5898</Typography> */}
 

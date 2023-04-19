@@ -128,6 +128,11 @@ export default function ConfirmBuyPlan(props) {
                 setMadeRequest(true)
             })
         }
+
+        else {
+            setPlanStatus(true)
+            setMadeRequest(true)
+        }
     }
 
     const addPlan = (e) => {
@@ -150,7 +155,7 @@ export default function ConfirmBuyPlan(props) {
           .catch((err) => {console.log(err)})
     }
 
-    if (madeRequest && planStatus) 
+    if (madeRequest && planStatus)
         return <Navigate to='/Dashboard' state={{page: 'buyPlanSuccessful', number: number2}} />
     else if (madeRequest && !planStatus)
         return <Navigate to='/Dashboard' 

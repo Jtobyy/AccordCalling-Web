@@ -144,7 +144,7 @@ export default function Otp() {
                 </Button>
                 <Typography id="reverify" visibility='hidden' pt={1} color='red' variant='body2'>reverify recaptcha</Typography>
                  
-                <CircularProgress id="circularProgress" sx={{ visibility:"hidden", position: "relative", left: "120px", top: '20px' }} color="success" />
+                <CircularProgress id="circularProgress" sx={{ visibility:"hidden", position: "relative", left: {xs: "120px", md: "150px"}, top: '20px' }} color="success" />
                 
                 <Stack mt={4} color="#2E368F" direction="row" justifyContent="space-between">
                     {/* <Typography variant="body2" >

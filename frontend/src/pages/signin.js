@@ -31,7 +31,9 @@ export default function Signin() {
         event.preventDefault();
       };
     
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        
         axios.post(`${BASE_URL_VOIPSWITCH}${ENDPOINTS['login']}`, {
             login: login,
             password: password,
@@ -104,7 +106,7 @@ export default function Signin() {
                     <Typography color="#BBBABA" pt={1}>Please log in to continue</Typography>
                     <Box component='form'
                         autoComplete="on"
-                        onSubmit={handleSubmit()}>
+                        onSubmit={handleSubmit}>
                         <Stack direction='column'>
                             <FormControl sx={{ pt: 3}} id="username" >
                                 <TextField onChange={(e) => setLogin(e.target.value)}

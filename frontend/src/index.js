@@ -21,6 +21,7 @@ import { loadProgressBar } from 'axios-progress-bar';
 import 'axios-progress-bar/dist/nprogress.css';
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from '@stripe/react-stripe-js';
+import { PrivacyPolicy } from './privacyPolicy';
 
 
 loadProgressBar();
@@ -69,6 +70,7 @@ class App extends React.Component {
             <Route path='/ProfileName' element={<ProfileName />}></Route>
             <Route path='/Auth' element={<Auth />}></Route>
             <Route path='/Dashboard' element={<Dashboard />}></Route>
+            <Route exact path='/PrivacyPolicy' element={<PrivacyPolicy />} />
 
             <Route path="*" element={<NotFound />} />            
           </Routes>

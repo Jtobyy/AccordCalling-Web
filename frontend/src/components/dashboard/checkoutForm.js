@@ -1,6 +1,7 @@
 import { CardCvcElement, CardExpiryElement, CardNumberElement } from "@stripe/react-stripe-js";
 import { Box, Button, Stack, FormControl, TextField, Typography, CircularProgress } from '@mui/material';
 import cardNumberIcon from '../../images/cardNumberIcon.svg';
+import stripePaymentIcon from '../../images/stripe-payment-icon.png';
 
 import { useElements, useStripe } from "@stripe/react-stripe-js";
 import { useState, useEffect } from "react";
@@ -116,7 +117,7 @@ export function CheckoutForm(props) {
   else
   return (
     <div>
-      <Box px={3} position="relative">
+      <Box mx='auto' sx={{px: {xs: 2, md: 5}, width: {xs: '90vw', md: '50vw', lg: '500px'}}} position="relative">
         <CircularProgress id="circularProgress" sx={{ visibility:"hidden", position: "absolute", left: "45%", top: "45%" }} color="success" />
         <Stack component='form' onSubmit={(e) => handleSubmit(e)} direction='column' pt={3}> 
                 <FormControl sx={{ pt: 3 }} >
@@ -152,6 +153,12 @@ export function CheckoutForm(props) {
                     sx={{  mt: 7.5, py: 1.5, backgroundColor: '#8DC641', textTransform: 'none', width: '100%' }}>
                         Make Payment
                     </Button>                  
+            <Box component='img' 
+                  mt={10}
+                  sx={{width: {xs: '50vw', md: '40vw', lg: '400px'}}} 
+                  src={stripePaymentIcon} 
+                  mx='auto'
+                 />
         </Stack>
       </Box>
     </div>

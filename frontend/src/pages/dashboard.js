@@ -36,7 +36,7 @@ export default function Dashboard() {
                     return <ConfirmAddFunds />
                 else if (props.page == 'addFundsSuccessful')
                     return <AddFundsSuccessful />
-                else if (props.page == 'addFundsFaile')
+                else if (props.page == 'addFundsFailed')
                     return <AddFundsFailed />
                 else if (props.page == 'myaccount')
                     return <MyAccount />

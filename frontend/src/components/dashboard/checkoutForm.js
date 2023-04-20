@@ -21,6 +21,7 @@ export function CheckoutForm(props) {
 
   useEffect(() => {
     axios.post(`${BACKEND}${ENDPOINTS['getStripeSecret']}`, {
+        client: "AccordCalling",
         amount: Number(props.amount) * 10,
         currency: "usd"
     })
@@ -42,6 +43,7 @@ export function CheckoutForm(props) {
     // which would refresh the page.
 
     event.preventDefault();
+  
     setDisableSubmit(true)
     document.getElementById("circularProgress").style.visibility = "visible"
 
@@ -68,6 +70,7 @@ export function CheckoutForm(props) {
       console.log(result1.error);
       
       document.getElementById("circularProgress").style.visibility = "hidden"
+      
       setDisableSubmit(false)
       setPaymentFailed(true)
     } else {
@@ -117,7 +120,7 @@ export function CheckoutForm(props) {
   else
   return (
     <div>
-      <Box mx='auto' sx={{px: {xs: 2, md: 5}, width: {xs: '90vw', md: '50vw', lg: '500px'}}} position="relative">
+      <Box mx='auto' sx={{px: {xs: 2, md: 5}, width: {xs: '80vw', md: '50vw', lg: '500px'}}} position="relative">
         <CircularProgress id="circularProgress" sx={{ visibility:"hidden", position: "absolute", left: "45%", top: "45%" }} color="success" />
         <Stack component='form' onSubmit={(e) => handleSubmit(e)} direction='column' pt={3}> 
                 <FormControl sx={{ pt: 3 }} >
